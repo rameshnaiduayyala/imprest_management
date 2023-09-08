@@ -35,9 +35,9 @@ function App() {
                     <Route path="/users" element={<Users />} />
                     <Route path="/notifications" element={<Notifications />} />
                     <Route path="/alerts" element={<Alerts />} />
-                    <Route path="/imprest" element={<Imprest />} />
+                    {/* <Route path="/imprest" element={<Imprest />} /> */}
                     <Route path="/categories" element={<Categories />} />
-                    <Route path="/stock" element={<SkuTable />} />
+                    <Route path="/imprest" element={<SkuTable />} />
                     <Route path="/stockform" element={<StockForm />} />
                     <Route path="/stockupdate/:id" element={<StockUpdate />} />
                     {/* Add more routes here */}

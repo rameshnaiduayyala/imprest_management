@@ -6,9 +6,10 @@ import AddIcon from '@mui/icons-material/Add';
 import CustomButton from '../controls/Button';
 import { useNavigate } from 'react-router-dom';
 
+
 interface Data {
   id: number;
-  barcode: string;
+  barcode: number;
   name: string;
   category: string;
   description: string;
@@ -53,8 +54,23 @@ setData(filterdata);
       const response = await fetch('https://rameshayyala.vercel.app/imprest_item');
       const jsonData = await response.json();
       console.log(jsonData,"jsondata")
-      const values = jsonData.map((obj:any) =>eval( obj.availablestock));
-      console.log(values,"values")
+  
+      const outofstock = jsonData.filter((item:any) => eval(item.availablestock) < eval(item.minstock));
+      const outcount = outofstock.length;
+      
+      console.log(outcount, "outofstock");
+      const instock = jsonData.filter((item:any) => eval(item.availablestock) >= (eval(item.minstock)));
+      const instockcount = instock.length;
+      console.log(instockcount, "instockcount");
+      const filteredByCondition2 = data.filter(item => (item.minstock < item.availablestock) && (item.availablestock <= (item.minstock + 7)));
+      const thresholdcount = filteredByCondition2.length;
+      console.log(thresholdcount,"thresholdcount")
+
+      localStorage.setItem("instockcount", JSON.stringify(instockcount));
+      localStorage.setItem("outcount", JSON.stringify(outcount));
+      localStorage.setItem("thresholdcount", JSON.stringify(thresholdcount));
+
+
   setData(jsonData);
       setDataCopy(jsonData);
     } catch (error) {
@@ -83,16 +99,20 @@ setData(filterdata);
   };
 
   return (
-    <div>
+    <div className='subpage_content'>
+       <div className='static_title'>
+       
+        <h2 className='page_main_title'><span><i className="fa fa-file-text" aria-hidden="true"></i></span>Stock</h2>
+      </div>
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
-        <CustomButton 
+        <CustomButton className='btn_general'
         variant="contained" 
-        color="#3f70ed" 
+        color="#6FB861" 
         startIcon={<AddIcon />} 
         onClick={() => navigate("/stockform")}>
           ADD
         </CustomButton>
-        <TextField
+        <TextField className='search_field'
           placeholder="Search"
           type="text"
           onChange={handleSearch}
@@ -106,7 +126,7 @@ setData(filterdata);
           }}
         />
       </Box>
-      <Paper style={{ width: '100%', marginTop: '0px' }}>
+      <Paper style={{ width: '100%', marginTop: '0px' }} className='data_table_global'>
         <ReusableTable
           columns={headCells}
           data={data}

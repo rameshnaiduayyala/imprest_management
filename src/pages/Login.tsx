@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import loginImage from "../images/image.png";
+import loginImage from '../images/image.png'
 import axios from "axios";
 
 import {
@@ -22,12 +22,12 @@ import { useNavigate } from "react-router-dom";
 
 const Login: React.FC = () => {
   const navigate = useNavigate();
-  const classes = useStyles();
+  const classes=useStyles()
   const [showPassword, setShowPassword] = useState(false);
   const [inputField, setInputField] = useState({ userid: "", password: "" });
   const [usernameError, setUsernameError] = useState("");
   const [passwordError, setPasswordError] = useState("");
-
+  
   const updateForm = (event: React.ChangeEvent<HTMLInputElement>): void => {
     const { name, value } = event.target;
     setInputField((prev) => ({ ...prev, [name]: value }));
@@ -35,11 +35,11 @@ const Login: React.FC = () => {
   const handleTogglePassword = () => {
     setShowPassword(!showPassword);
   };
-
+  console.log("hello")
   const submitForm = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setUsernameError("");
-    setPasswordError("");
+    setUsernameError(""); // Clear previous username error message
+    setPasswordError(""); 
 
     if (!inputField.userid) {
       setUsernameError("Please enter the username");
@@ -51,49 +51,53 @@ const Login: React.FC = () => {
       return;
     }
 
-    const payload = {
-      username: inputField.userid,
-      password: inputField.password,
-    };
-
+    const payload = { username: inputField.userid, password: inputField.password };
+  
     try {
       const response = await axios.post("https://rameshayyala.vercel.app/users", payload);
-      console.log(response, "response");
-      if (response.status == 200) {
-        toast.success("Login successful "+response.data);
-        console.log("Login successful "+response.data.username)
+  
+      if (response.status === 200) {
+        toast.success("Login successful");
         localStorage.setItem("username", JSON.stringify(response.data.data));
         setTimeout(() => {
           navigate("/dashboard");
-        }, 1000);
-      }
+        }, 2000);
+      } 
+
+    
     } catch (error) {
       setPasswordError("Invalid username and password");
     }
   };
-
+  
   return (
-    <div className={classes.mmaindiv}>
-      <img
-        src={loginImage}
-        alt="Login"
-        style={{ width: "50%", height: "100vh" }}
-      />
-      <Container component="main" maxWidth="xs">
+    <div className={classes.mmaindiv}  style={{ width: "49%", backgroundColor: "#3f70ed", textAlign: "center" }}>
+         <img
+          src={loginImage}
+          alt="Login"
+          style={{ width: "auto", height: "100vh",textAlign: "center", paddingLeft: "7%" }}
+        />
+      <Container component="main" maxWidth="xs" >
         <ToastContainer />
-
-        <Box className={classes.login_form}>
-          <div>
-            <Typography variant="h4" className={classes.login_form}>
+     
+        <Box
+          className={classes.login_form }
+          
+        >
+        
+          <div style={{ backgroundColor: "#fff", margin: "0 0 0 55%", width:"100%" }}>
+            <Typography  style={{fontSize: "2.2rem" , fontWeight: "600", textAlign: "left"}}
+             variant="h4" 
+             className={classes.login_form}>
               Welcome Back
             </Typography>
-            <Typography variant="h6" className={classes.login}>
-              Login to get Started
-            </Typography>
-            <Box
-              className="main"
+         <Typography style={{fontSize: "1.2rem" , fontWeight: "500", marginBottom: "10px", textAlign: "left"}}
+         variant="h6" 
+         className={classes.login}>Login to get Started</Typography>
+            <Box className="main"
               component="form"
               noValidate
+              
               onSubmit={submitForm}
             >
               <TextField
@@ -131,20 +135,23 @@ const Login: React.FC = () => {
                   ),
                 }}
                 helperText={passwordError}
-                error={!!passwordError}
+                error={!!passwordError}  
               ></TextField>
+   
 
-              <Link href="/forgotpass" className={classes.forgotlink}>
-                Forgot password?
-              </Link>
+     <Link href="/forgotpass" className={classes.forgotlink}>
+                    Forgot password?
+                  </Link>
               <Button
-                style={{ width: "25rem", height: "3rem", marginTop: "30px" }}
+              style={{ width: "25rem", height: "3rem",marginTop:'30px' }}
                 type="submit"
                 variant="contained"
-                startIcon={<LoginIcon style={{ color: "white" }} />}
-              >
+                
+                startIcon={<LoginIcon style={{color:'white'}}/>}
+                >
                 SIGN IN
               </Button>
+
             </Box>
           </div>
         </Box>

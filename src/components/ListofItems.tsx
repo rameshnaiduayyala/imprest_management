@@ -33,16 +33,16 @@ const breadcrumbIcons: Record<string, JSX.Element> = {
 };
 
 const ListofItems: React.FC = () => {
-  const paths = ["Home", "Purchase", "Stock", "Imprest", "Notifications", "Alerts", "Categories", "Users"];
+  const paths = ["Home", "Purchase", "Imprest", "Notifications", "Alerts", "Categories", "Users"];
 
   return (
-    <Box bgcolor="#eeeeee" p={1} style={{ display: 'flex', justifyContent: 'center' }}>
+    <Box bgcolor="#eeeeee" p={1} style={{ display: 'flex', justifyContent: 'start', marginTop: '-7px', paddingLeft: '25px', marginLeft: '-5px', marginRight: '-5px' }}>
       <Breadcrumbs aria-label="breadcrumb" separator="|">
         {paths.map((path, index) => (
           <Link to={breadcrumbPaths[path]} key={index} style={{ textDecoration: "none", color: "inherit" }}>
             <Box display="flex" alignItems="center">
               {breadcrumbIcons[path]}
-              <Typography variant="h1" sx={{ pl: 2, pr: 4, fontSize: '16px', fontFamily: 'sans-serif' }}>
+              <Typography variant="h1" sx={{ pl: 1, pr: 1, fontSize: '14px', fontFamily: 'sans-serif', color: '#373737', fontWeight: '600', textTransform: 'uppercase' }}>
                 {path}
               </Typography>
             </Box>

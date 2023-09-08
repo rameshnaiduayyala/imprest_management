@@ -20,8 +20,8 @@ import ListofItems from "../components/ListofItems"
 const ResponsiveAppBar = () => {
   const classes = useStyles();
   const navigate = useNavigate();
-  const payload:unknown=localStorage.getItem('username')
-  const user:string=JSON.parse(payload)
+  const payload:any=localStorage.getItem('username')
+  const user:any=JSON.parse(payload)
   console.log(user,"user")
   const handleLogout = () => {
     localStorage.removeItem("username")
@@ -40,7 +40,7 @@ const ResponsiveAppBar = () => {
 return (
   <>
     <AppBar position="static" className={classes.customAppBar}>
-      <Toolbar className={classes.customAppBar}>
+      <Toolbar>
         <Grid container alignItems="center"
           justifyContent="flex-start" flexWrap='nowrap'>
           {/* Image */}
@@ -56,7 +56,7 @@ return (
           <CustomButton color='inherit' onClick={() => navigate("/stock")}>Stock</CustomButton>
           <CustomButton color='inherit' onClick={() => navigate("/users")}>Users</CustomButton> */}
 
-        <span style={{ fontSize: '20px' }}> 
+        <span style={{ fontSize: '17px' }}> 
          {user.user_name} 
         
         </span>

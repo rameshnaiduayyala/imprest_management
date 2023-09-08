@@ -89,8 +89,8 @@ function StockUpdate() {
 
           const itemData = await response.json();
           console.log(itemData,"itemdata")
-
           setFormData(itemData[0]);
+          
 
         } else {
 
@@ -147,7 +147,7 @@ const handleSubmit = async (e: React.FormEvent) => {
 
         toast.success('Data updated successfully', { position: 'top-right' });
 
-        navigate('/stock'); // Redirect back to the stock page
+        navigate('/imprest'); // Redirect back to the stock page
 
       } else {
 
@@ -166,7 +166,7 @@ const handleSubmit = async (e: React.FormEvent) => {
  const handleReset = () => {
     toast.error("You have canceled", { position: "top-center" });
     setFormData(initialFormData);
-    navigate("/stock")
+    navigate("/imprest")
   };
   return (
     <div className={classes.container}>

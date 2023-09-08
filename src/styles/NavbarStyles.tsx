@@ -7,22 +7,34 @@ export const useStyles = makeStyles(() => ({
     justifyContent: 'space-between',
     backgroundColor: "#3f70ed",
   marginBottom:'5px ! important',
+  marginTop:'0',
+  borderBottomColor: "#fff",
+  borderBottomStyle: 'solid',
+  borderBottomWidth: '3px',
+  minHeight: '70px',
+ 
+ 
   
-    color: 'white ! important'
+    color: 'white ! important',
+    
   },
   img: {
-    height: '50px',
-    width: '50px'
+    height: '45px',
+    width: '45px',
+    paddingTop: '7px',
+    marginLeft: '10px'
   },
   gridcontainer: {
     alignItems: "center", justifyContent: "flex-end",
   },
   title:{
     color:'white',
-    fontSize:'25px !important',
+    fontSize:'20px !important',
     marginLeft:'15px',
-    paddingLeft:'20px',
-    whiteSpace: 'nowrap' 
+    paddingLeft:'15px',
+    whiteSpace: 'nowrap',
+    fontWeight: 'bold'
+
     
   }
 
@@ -44,7 +56,7 @@ export const StyledMenu = styled((props: MenuProps) => (
   />
 ))(({ theme }) => ({
   '& .MuiPaper-root': {
-    borderRadius: 6,
+    borderRadius: 0,
     marginTop: theme.spacing(1),
     minWidth: 180,
     color:

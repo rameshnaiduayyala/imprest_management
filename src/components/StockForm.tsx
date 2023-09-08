@@ -79,7 +79,7 @@ function StockData() {
     if(fetchapi.status==201){
       toast.success("data created");
       
-   setTimeout(()=>{    navigate("/stock")},2000)
+   setTimeout(()=>{    navigate("/imprest")},2000)
     }else{
       toast.error("data faield")
     }
@@ -89,7 +89,6 @@ function StockData() {
   const handleReset = () => {
     toast.error("You have canceled", { position: "top-center" });
     setFormData(initialFormData);
-    
   };
 
   return (
@@ -98,7 +97,6 @@ function StockData() {
         <Typography variant="h4" align="center" gutterBottom>
           Add Items
         </Typography>
-        
         <hr style={{ borderBottom: "2px solid black" }} />
         <form onSubmit={handleSubmit}>
           <Grid container spacing={2}>
@@ -150,7 +148,7 @@ function StockData() {
                 onClick={handleReset}
                 style={{ marginLeft: "10px" }}
               >
-                Clear
+                Cancel
               </Button>
             </Grid>
           </Grid>

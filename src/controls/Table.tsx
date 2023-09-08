@@ -28,13 +28,13 @@ interface Data {
 interface Props {
     columns: Column[];
     data: Data[];
-     onEdit ?:(id:number)=>void
-    onDelete?: (id: number) => void; // Define the onDelete prop type
+     onEdit:(id:number)=>void
+    onDelete: (id: number) => void; // Define the onDelete prop type
   }
 
 const ReusableTable: React.FC<Props> = ({ columns, data,onDelete,onEdit }) => {
   const [page, setPage] = useState<number>(0);
-  const [rowsPerPage, setRowsPerPage] = useState<number>(5);
+  const [rowsPerPage, setRowsPerPage] = useState<number>(10);
   const [orderBy, setOrderBy] = useState<string>('');
   const [order, setOrder] = useState<'asc' | 'desc'>('asc');
   
@@ -73,7 +73,7 @@ const ReusableTable: React.FC<Props> = ({ columns, data,onDelete,onEdit }) => {
       <TableContainer>
         <Table>
           <TableHead>
-            <TableRow style={{backgroundColor:"#e1f0ef",boxShadow:"5px 3px blue"}}>
+            <TableRow>
               {columns.map((column) => (
                 <TableCell key={column.id} align={column.align || 'left'}>
                   {column.id !== orderBy ? (
@@ -124,7 +124,7 @@ const ReusableTable: React.FC<Props> = ({ columns, data,onDelete,onEdit }) => {
         </Table>
       </TableContainer>
       <TablePagination
-        rowsPerPageOptions={[5, 10, 25]}
+        rowsPerPageOptions={[10, 20, 30]}
         component="div"
         count={data.length}
         rowsPerPage={rowsPerPage}
