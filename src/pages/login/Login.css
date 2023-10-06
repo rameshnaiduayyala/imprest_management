@@ -1,0 +1,24 @@
+.mmaindiv {
+    display: flex;
+    flex-direction: row;
+    align-items:center;
+    }
+    .login_form {
+    color:blue
+    }
+    .login {
+     color: #36454F;
+    }
+    .forgotlink {
+    display:flex ;
+    justify-content:flex-end ;
+    text-decoration: none;
+    }
+    .button {
+    width: -webkit-fill-available;
+    height: 3rem;
+    margin-top: 30px;
+    }
+    .loginIcon {
+        color: white;
+    }

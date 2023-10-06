@@ -1,71 +1,49 @@
-// import From from "./components/From"
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-// import StockTable from "./components/SkuTable";
-import SkuTable from "./components/SkuTable";
-import StockForm from "./components/StockForm";
-import Navbar from "./components/Navbar";
-import NoPage from "./pages/NoPage";
-import Dashboard from "./pages/dashboard/Dashboard";
-import Purchase from "./pages/purchaseOrder/Purchase";
-import Users from "./pages/users/Users";
-import Login from "./pages/Login";
-import StockUpdate from "./components/StockUpdate";
-import Notifications from "./pages/notifications/Notifications";
-import Alerts from "./pages/alerts/Alerts";
-import Imprest from "./pages/imprests/Imprest";
-import Categories from "./pages/categories/Categories";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import Login from "./pages/login/Login";
+import User from "./pages/user/User";
+import Navbar from "./components/navbar/Navbar";
+import AddRole from "./pages/role/AddRole";
+import RoleList from "./pages/role/RoleList";
+import EditRole from "./pages/role/EditRole";
+import AddUser from "./pages/user/AddUser";
+import EditUser from "./pages/user/EditUser";
+import UserRole from "./pages/userRoles/UserRoles";
+import AddUserRole from "./pages/userRoles/AddUserRole";
+import EditUserRole from "./pages/userRoles/EditUserRole";
+import ProductList from "./pages/product/ProductList";
+import EditProduct from "./pages/product/EditProduct";
+import AddProduct from "./pages/product/AddProduct";
+
+function NavbarWrapper() {
+  const location = useLocation();
+  const shouldShowNavbar = () => {
+    return location.pathname !== "/";
+  };
+  return shouldShowNavbar() ? <Navbar /> : null;
+}
 
 function App() {
   return (
-    <>
-      <div>
-        <BrowserRouter>
-          {/* Move the useLocation hook inside BrowserRouter */}
-          <Routes>
-            <Route path="/" element={<Login />} />
-            <Route
-              path="/*"
-              element={
-                <>
-                  {/* Render Navbar */}
-                  <Navbar />
-                  <Routes>
-                    <Route path="/dashboard" element={<Dashboard />} />
-                    <Route path="/purchase" element={<Purchase />} />
-                    <Route path="/users" element={<Users />} />
-                    <Route path="/notifications" element={<Notifications />} />
-                    <Route path="/alerts" element={<Alerts />} />
-                    {/* <Route path="/imprest" element={<Imprest />} /> */}
-                    <Route path="/categories" element={<Categories />} />
-                    <Route path="/imprest" element={<SkuTable />} />
-                    <Route path="/stockform" element={<StockForm />} />
-                    <Route path="/stockupdate/:id" element={<StockUpdate />} />
-                    {/* Add more routes here */}
-                  </Routes>
-                  {/* Render Footer */}
-                  
-                </>
-              }
-            />
-            <Route path="/nopage" element={<NoPage />} />
-          </Routes>
-        </BrowserRouter>
-      </div>
-    </>
+    <div>
+      <BrowserRouter>
+        <NavbarWrapper />
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/users" element={<User />} />
+          <Route path="/addrole" element={<AddRole />} />
+          <Route path="/rolelist" element={<RoleList />} />
+          <Route path="/editrole/:id" element={<EditRole />} />
+          <Route path="/adduser" element={<AddUser />} />
+          <Route path="/edituser/:id" element={<EditUser />} />
+          <Route path="/userrole" element={<UserRole />} />
+          <Route path="/addroleuser" element={<AddUserRole />} />
+          <Route path="/editroleuser/:id" element={<EditUserRole />} />
+          <Route path="/productlist" element={<ProductList />} />
+          <Route path="/editproduct/:id" element={<EditProduct />} />
+          <Route path="/addproduct" element={<AddProduct />} />
+        </Routes>
+      </BrowserRouter>
+    </div>
   );
 }
-
 export default App;
-
-
-
-
-// const App = () => {
-//   return (
-//     <div>
-//       <From />
-//     </div>
-//   )
-// }
-
-// export default App

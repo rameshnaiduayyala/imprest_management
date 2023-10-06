@@ -1,0 +1,9 @@
+.dialogWrapper {
+    padding: 2px;
+    position: 'absolute';
+    top: 5px
+}
+
+.dialogTitle {
+    padding-right: 0px;
+}

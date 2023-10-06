@@ -1,242 +1,23 @@
-:root{
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
- 
-}
-
-/* :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
 body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  margin: auto;
 }
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
-} */
-
-/*************Customized  & Overwrite CSS styles Start********************/
-
-/**************Top Menu Styles Start************/
-ol.MuiBreadcrumbs-ol .css-i4bv87-MuiSvgIcon-root
-{
-  font-size: 1.20rem;
-  color:#373737;
-}
-
-/**************Top Menu Styles End*************/
-
-/**************Dashboard Styles Start************/
-div.dashboard_blocks_row .css-bhp9pd-MuiPaper-root-MuiCard-root
-{
-  background-color: #fff;
-  box-shadow: none !important;
-}
-
-div.dashboard_blocks_row .MuiCardContent-root
-{
-  border-radius:15px;
-  border:none !important;
-  min-height: 180px;
-  margin: 0 2% 3% 0;
-}
-h6.page_main_title
-{
-  font-weight: 600;
- 
-}
-div.dashboard_blocks_row .MuiCardContent-root h6{
-  font-size: 1.0rem;
-  font-weight: 600;
-  color:#373737;
-  margin: 5px 0 0 10px;
-}
-div.dashboard_blocks_row .MuiSvgIcon-root
-{
-  font-size: 2.0rem !important;
-}
-.dashboard_block_item .css-gepadz-MuiTypography-root
-{
-color:#b6bac5;
-font-size: 2.2rem;
-padding: 0 20px;
-}
-.dashboard_block_item .css-9bqhsz
-{
-width:117px;
-height: 117px;
-text-align: center;
-}
-div.dashboard_blocks_row .block_circle_content h6
-{
-  font-size: 0.77rem;
-  letter-spacing: -0.02rem;
-  text-align: center;
-  padding-top: 0.77rem;
-}
-div.dashboard_blocks_row .block_circle_content h5
-{
-  font-size: 2.7rem;
-  font-weight: 600;
-  letter-spacing: -0.02rem;
-  text-align: center;
-  padding: 0;
-  margin: 0;
-  margin-top:-0.77rem;
-  color:#373737;
-}
-
-div.dashboard_blocks_row .card_notification_value_red
-{
-  color:#ff353d;
-  font-size: 2rem;
-  font-weight: 600;
-}
-div.dashboard_blocks_row .card_notification_value_orrange
-{
-  color:#ff5c00;
-  font-size: 2rem;
-  font-weight: 600;
-}
-div.dashboard_blocks_row .card_notification_value_green
-{
-  color:#50b43d;
-  font-size: 2rem;
-  font-weight: 600;
-}
-.po_cards_content .makeStyles-purchase-25 {
-  color: black !important;
-  width: 170px !important;
-  height: 100px !important;
-  border-radius: 20px !important;
-  background-color: white !important;
-  margin: 1rem 2rem;
-}
-.po_cards_content .css-gepadz-MuiTypography-root
-{
-color:#b6bac5;
-font-size: 2.2rem;
-padding: 0 20px;
-margin: 2rem 0 0 0;
-}
-.po_cards_content h6
-{
-  font-size: 0.8rem !important;
-}
-.po_cards_content .h6
-{
-  font-size: 1.7rem !important;
-  font-weight: 600;
-}
-.static_title h2.page_main_title
-{
-  font-size: 1.3rem;
-  font-weight: 600 !important;
-  color:#3a67d9;
-  margin: 1rem 0 0 0;
-}
-.page_main_title span i{
-  padding: 0 10px 0 0;
-  font-size: 1.20rem;
-}
-.subpage_content
-{
-  margin: 0 2rem;
-}
-.subpage_content .css-1kw3y0a
-{
-  margin-bottom: 0;
-}
-.cards_notifications .css-gepadz-MuiTypography-root {
-  color: #b6bac5;
-  font-size: 2.2rem;
-  padding: 10px 20px;
-  margin-top: 20px;
-}
-
-/**************Dashboard Styles End************/
-
-/*****************88Data Table Start***************/
-
-.data_table_global table thead.MuiTableHead-root
-{
-  border-top:5px solid #3a67d9;
+.data_table_global table thead.MuiTableHead-root {
+  border-top: 5px solid #3a67d9;
   font-size: 1rem;
   font-weight: 800;
 }
-.data_table_global table thead.MuiTableHead-root th
-{
- 
+.data_table_global table thead.MuiTableHead-root th {
   font-size: 0.9rem;
   font-weight: 700;
   color: #3a67d9;
   height: 25px;
   padding: 10px 10px;
-  box-shadow: 0px 3px 3px -3px rgba(92,92,92,0.75);
-  -webkit-box-shadow: 0px 3px 3px -3px rgba(92,92,92,0.75);
-  -moz-box-shadow: 0px 3px 3px -3px rgba(92,92,92,0.75);
-background-color: #fff;
+  box-shadow: 0px 3px 3px -3px rgba(92, 92, 92, 0.75);
+  -webkit-box-shadow: 0px 3px 3px -3px rgba(92, 92, 92, 0.75);
+  -moz-box-shadow: 0px 3px 3px -3px rgba(92, 92, 92, 0.75);
+  background-color: #fff;
 }
-.data_table_global table tbody tr td.css-1ex1afd-MuiTableCell-root
-{
+.data_table_global table tbody tr td.css-1ex1afd-MuiTableCell-root {
   text-align: left;
   padding: 0px 15px;
   color: rgba(0, 0, 0, 0.87);
@@ -245,21 +26,20 @@ background-color: #fff;
 .data_table_global table tbody tr:nth-child(even) {
   background-color: #e9effd;
 }
-.search_field .css-1o9s3wi-MuiInputBase-input-MuiOutlinedInput-input
-{
-  padding:8px 10px;
- 
+.search_field .css-1o9s3wi-MuiInputBase-input-MuiOutlinedInput-input {
+  padding: 8px 10px;
 }
 
-button.btn_general
-{
+button.btn_general {
   margin: 0 !important;
   color: #fff !important;
-    font-weight: 600;
+  font-weight: 600;
 }
-.css-1d6wzja-MuiButton-startIcon
-{
-  margin-right:0 !important;
+.css-1d6wzja-MuiButton-startIcon {
+  margin-right: 0 !important;
 }
-/*****************88Data Table Start***************/
-/*************Customized  & Overwrite CSS styles End**********************/
+
+.tableRow {
+  height: 0px;
+  padding: 0px;
+}
