@@ -7,6 +7,10 @@ import CircularProgress from "@mui/material/CircularProgress";
 import { getImprests } from "../../services/imprest.svc";
 import { Imprest } from "../../models/imprest.model";
 import CustomButton from "../../components/common/Button";
+import isAdmin from "../../services/auth.svc";
+import { deleteImprest } from "../../services/imprest.svc";
+import { ToastContainer, toast } from "react-toastify";
+
 
 const headCells = [
     { id: "name", label: "Imprest Name", IsNestedProprty: false },
@@ -42,20 +46,34 @@ const ImprestList: React.FC = () => {
     const handleEdit = (id: number) => {
         navigate(`/editimprest/${id}`);
     };
-    console.log(imprest, "Imprest Data")
+
+    const handleDelete = async (id: number) => {
+        try {
+            await deleteImprest(id);
+            toast.success("Delete Successfull")
+            fetchImprests();
+        } catch (err) {
+            toast.error("Product assigned to imprest can't delete")
+        }
+    };
     return (
         <div className="subpage_content">
+            <ToastContainer />
             <div className="top_title_buttons_area" style={{ display: 'flex' }}>
                 <h2 className="page_main_title">List Of Imprests</h2>
                 <div>
                     <div className="gen_buttons" style={{ paddingLeft: '50px' }}>
-                        <CustomButton
-                            type="submit"
-                            startIcon={<AddCircleIcon />}
-                            onClick={() => navigate("/addimprest")}
-                        >
-                            <span>ADD Imprest</span>
-                        </CustomButton></div>
+                        {isAdmin() && (
+                            <CustomButton
+                                type="submit"
+                                startIcon={<AddCircleIcon />}
+                                onClick={() => navigate("/addimprest")}
+                            >
+                                <span>ADD Imprest</span>
+                            </CustomButton>
+                        )}
+
+                    </div>
                 </div>
             </div>
             <Box
@@ -77,9 +95,12 @@ const ImprestList: React.FC = () => {
                     </div>
                 ) : (
                     <ReusableTable
-                        columns={headCells}
+                        columns={headCells.filter((cell) => {
+                            return isAdmin() || cell.id !== "actions";
+                        })}
                         data={imprest}
                         onEdit={handleEdit}
+                        onDelete={handleDelete}
                     />
                 )}
             </Paper>

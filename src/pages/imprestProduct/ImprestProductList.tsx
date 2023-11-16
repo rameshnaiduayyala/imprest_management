@@ -9,6 +9,7 @@ import CustomButton from "../../components/common/Button";
 import { ImprestProduct } from "../../models/imprestProduct.model";
 import { deleteImprestProduct, getImprestProduct } from "../../services/imprestProduct.svc";
 import { ToastContainer, toast } from "react-toastify";
+import isAdmin from "../../services/auth.svc";
 
 const headCells = [
     { id: "Product.description", label: "Product Name", IsNestedProprty: true },
@@ -57,14 +58,19 @@ const ImprestProductList: React.FC = () => {
                 <h2 className="page_main_title">Imprest Products List</h2>
                 <div>
                     <div className="gen_buttons" style={{ paddingLeft: '50px' }}>
-                        <CustomButton
-                            className=""
-                            startIcon={<PersonAddIcon />}
-                            onClick={() => navigate("/addimprestproduct")}
+                        {
+                            isAdmin() && (
+                                <CustomButton
+                                    className=""
+                                    startIcon={<PersonAddIcon />}
+                                    onClick={() => navigate("/addimprestproduct")}
 
-                        >
-                            <span>ADD Imprest Product</span>
-                        </CustomButton></div>
+                                >
+                                    <span>ADD Imprest Product</span>
+                                </CustomButton>
+                            )
+                        }
+                    </div>
                 </div>
             </div>
             <Box
@@ -86,7 +92,9 @@ const ImprestProductList: React.FC = () => {
                     </div>
                 ) : (
                     <ReusableTable
-                        columns={headCells}
+                        columns={headCells.filter((cell) => {
+                            return isAdmin() || cell.id !== "actions";
+                        })}
                         data={imprestProduct}
                         onEdit={handleEdit}
                         onDelete={deleteimprestProduct}

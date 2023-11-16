@@ -8,8 +8,6 @@ import { CircularProgress } from "@mui/material";
 import CoPresentIcon from "@mui/icons-material/CoPresent";
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from "react-toastify";
-import Modal from "../../components/common/Modal";
-import EditRole from "./EditRole";
 
 const headerCells = [
     { id: "name", label: "Role Name" },
@@ -22,22 +20,10 @@ const RoleList = () => {
     const navigate = useNavigate();
     const [roles, setRoles] = useState<Role[]>([])
     const [loading, setLoading] = useState<boolean>(true);
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const [roleId, setRoleId] = useState(0);
-
-    const openModal = (id: number) => {
-        setRoleId(id),
-            setIsModalOpen(true);
-    };
-    const closeModal = () => {
-        setIsModalOpen(false);
-    };
 
     useEffect(() => {
-        if (!isModalOpen) {
-            fetchRoles();
-        }
-    }, [isModalOpen]);
+        fetchRoles();
+    }, [])
 
     const fetchRoles = async () => {
         try {
@@ -50,6 +36,10 @@ const RoleList = () => {
             console.error('Feth roles failed:', error);
 
         }
+    };
+
+    const handleEdit = (id: number) => {
+        navigate(`/editrole/${id}`)
     };
 
     const handleDelete = async (id: number) => {
@@ -101,18 +91,11 @@ const RoleList = () => {
                     <ReusableTable
                         columns={headerCells}
                         data={roles}
-                        onEdit={(id) => openModal(id)}
+                        onEdit={handleEdit}
                         onDelete={handleDelete}
                     />
                 )}
             </Paper>
-            <div>
-                <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-                    <div>
-                        <EditRole id={roleId} onClose={closeModal} />
-                    </div>
-                </Modal>
-            </div>
         </div>
     )
 }

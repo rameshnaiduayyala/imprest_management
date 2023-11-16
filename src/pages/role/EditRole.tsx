@@ -2,18 +2,15 @@ import React, { useState, FormEvent, useEffect } from 'react';
 import ReusableTextField from "../../components/common/Texfiled";
 import CustomButton from "../../components/common/Button";
 import { Role } from "../../models/role.model";
+import { useNavigate, useParams } from 'react-router-dom';
 import { getRoleById, updateRole } from '../../services/role.svc';
 import CoPresentIcon from "@mui/icons-material/CoPresent";
 import CancelIcon from "@mui/icons-material/Cancel";
-
 import "./role.css";
 import { Box, Grid } from '@mui/material';
 import { ToastContainer, toast } from 'react-toastify';
-interface EditRoleProps {
-    id: number;
-    onClose: () => void;
-}
-const EditRole: React.FC<EditRoleProps> = ({ id, onClose }) => {
+
+const EditRole: React.FC = () => {
     const initialRoleState: Role = {
         name: '',
         description: '',
@@ -26,11 +23,15 @@ const EditRole: React.FC<EditRoleProps> = ({ id, onClose }) => {
         description: '',
     });
 
+    const navigate = useNavigate();
+    const { id } = useParams<{ id: string | undefined }>();
+    const roleId = id ? parseInt(id, 10) : -1;
+
     useEffect(() => {
-        if (id) {
-            loadRole(id);
+        if (roleId !== -1) {
+            loadRole(roleId);
         }
-    }, [id]);
+    }, [roleId]);
 
     const loadRole = async (roleId: number) => {
         const oneRole = await getRoleById(roleId);
@@ -60,9 +61,7 @@ const EditRole: React.FC<EditRoleProps> = ({ id, onClose }) => {
         }
         return errors;
     };
-    const handleCancel = () => {
-        onClose()
-    }
+
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
@@ -73,18 +72,22 @@ const EditRole: React.FC<EditRoleProps> = ({ id, onClose }) => {
         }
 
         try {
-            const updatedRole = await updateRole(id, role);
+            const updatedRole = await updateRole(roleId, role);
             if (updatedRole) {
                 setRole(updatedRole);
             }
             setRole(initialRoleState);
             toast.success("Edited Success");
             setTimeout(() => {
-                onClose();
+                navigate('/rolelist');
             }, 1000);
         } catch (error) {
             console.log(error);
         }
+    };
+
+    const handleCancel = () => {
+        navigate("/rolelist");
     };
 
     return (
@@ -104,11 +107,10 @@ const EditRole: React.FC<EditRoleProps> = ({ id, onClose }) => {
                         </CustomButton>
                         <CustomButton
                             className=""
-                            startIcon={<CancelIcon />}
+                            startIcon={<CancelIcon className="button_icon" />}
                             onClick={handleCancel}
                         >
                             <span>Cancel</span>
-
                         </CustomButton>
                     </div>
                 </div>

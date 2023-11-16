@@ -57,5 +57,9 @@ export async function updateImprest(imprestId: number, imprest: any) {
     return response.data;
   }
 
+}
 
+
+export const deleteImprest = async (id: number) => {
+  return await axiosInstance.delete(`${url}/${id}`);
 }

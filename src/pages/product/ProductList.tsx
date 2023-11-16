@@ -7,6 +7,7 @@ import { Box, CircularProgress, Paper } from "@mui/material";
 import { useNavigate } from 'react-router-dom';
 import InventoryIcon from "@mui/icons-material/Inventory";
 import { ToastContainer, toast } from "react-toastify";
+import isAdmin from "../../services/auth.svc";
 
 const headCells = [
   { id: "generic_name.name", label: "Generic Name", IsNestedProprty: true },
@@ -68,13 +69,21 @@ const ProductList: React.FC = () => {
         <h2 className="page_main_title">Product List</h2>
         <div>
           <div className="gen_buttons" style={{ paddingLeft: '50px' }}>
-            <CustomButton
-              className=""
-              startIcon={<InventoryIcon />}
-              onClick={() => navigate("/addproduct")}
-            >
-              <span>ADD Product</span>
-            </CustomButton></div>
+
+            {
+              isAdmin() && (
+                <CustomButton
+                  className=""
+                  startIcon={<InventoryIcon />}
+                  onClick={() => navigate("/addproduct")}
+                >
+                  <span>ADD Product</span>
+                </CustomButton>
+              )
+            }
+
+
+          </div>
         </div>
       </div>
       <Box
@@ -95,7 +104,13 @@ const ProductList: React.FC = () => {
             <CircularProgress />
           </div>
         ) : (
-          <ReusableTable columns={headCells} data={products} onEdit={handleEdit} onDelete={handleDelete} />
+          <ReusableTable
+            columns={headCells.filter((cell) => {
+              return isAdmin() || cell.id !== "actions";
+            })}
+            data={products}
+            onEdit={handleEdit}
+            onDelete={handleDelete} />
         )}
       </Paper>
     </div>

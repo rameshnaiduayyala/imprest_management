@@ -20,9 +20,9 @@ const EditUserRole = () => {
   const [roles, setRoles] = useState<DropdownOption[]>([]);
   const [imprests, setImprests] = useState<DropdownOption[]>([]);
   const [userRoleData, setUserRoleData] = useState({
-    user_id: "",
-    role_id: "",
-    imprest_id: "",
+    user: "",
+    role: "",
+    imprest: "",
   });
   const navigate = useNavigate();
   const { id } = useParams();
@@ -90,9 +90,9 @@ const EditUserRole = () => {
       if (response.status === 200) {
         const roleData = response.data;
         setUserRoleData({
-          user_id: roleData.user_id.toString(),
-          role_id: roleData.role_id.toString(),
-          imprest_id: roleData.imprest_id.toString(),
+          user: roleData.user_id.toString(),
+          role: roleData.role_id.toString(),
+          imprest: roleData.imprest_id.toString(),
         });
       }
     } catch (error) {
@@ -103,6 +103,8 @@ const EditUserRole = () => {
   // Update Function
   const handleSubmit = async () => {
     try {
+
+
       if (id) {
         const userRoleId = parseInt(id)
         const response = await putUserRoleData(userRoleId, userRoleData);
@@ -130,7 +132,7 @@ const EditUserRole = () => {
   const handleCancel = () => {
     navigate("/userrole");
   };
-
+  console.log(imprests)
   return (
     <>
       <ToastContainer />
@@ -167,24 +169,24 @@ const EditUserRole = () => {
               <Dropdown
                 name="Users:"
                 options={users}
-                value={userRoleData.user_id}
-                onChange={(value) => handleChange("user_id", value)}
+                value={userRoleData.user}
+                onChange={(value) => handleChange("user", value)}
               />
             </Grid>
             <Grid item xs={12} sm={6} md={3} className="grid_item_space">
               <Dropdown
                 name="Role:"
                 options={roles}
-                value={userRoleData.role_id}
-                onChange={(value) => handleChange("role_id", value)}
+                value={userRoleData.role}
+                onChange={(value) => handleChange("role", value)}
               />
             </Grid>
             <Grid item xs={12} sm={6} md={3} className="grid_item_space">
               <Dropdown
                 name="Imprest:"
                 options={imprests}
-                value={userRoleData.imprest_id}
-                onChange={(value) => handleChange("imprest_id", value)}
+                value={userRoleData.imprest}
+                onChange={(value) => handleChange("imprest", value)}
               />
             </Grid>
 

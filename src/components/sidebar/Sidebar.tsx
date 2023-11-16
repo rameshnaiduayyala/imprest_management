@@ -34,32 +34,32 @@ const Sidebar: React.FC<SidebarProps> = ({ children }) => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const roles: any = localStorageService.getItem("roles") ?? [];
     const authed: boolean =
-      roles?.filter((val: Role) => val?.name?.toLowerCase() === "admin")?.length >
-      0;
+        roles?.filter((val: Role) => val?.name?.toLowerCase() === "admin")?.length >
+        0;
     const [isOpen, setOpen] = useState(false);
     const [activeLink, setActiveLink] = useState<string | null>(null);
     const [isNameVisible, setNameVisibility] = useState(false);
     const [alertTriggered, setAlertTriggred] = useState(false)
 
-    useEffect(()=> {
+    useEffect(() => {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         let timerId: any;
-    
+
         if (localStorageService.getItem("expireTime") && alertTriggered === false) {
-          timerId = setInterval(() => {
-            if((new Date(localStorageService.getItem("expireTime")*1000).getTime() === new Date().getTime() || new Date(localStorageService.getItem("expireTime")*1000).getTime() < new Date().getTime()) && alertTriggered === false){
+            timerId = setInterval(() => {
+                if ((new Date(localStorageService.getItem("expireTime") * 1000).getTime() === new Date().getTime() || new Date(localStorageService.getItem("expireTime") * 1000).getTime() < new Date().getTime()) && alertTriggered === false) {
                     setAlertTriggred(true)
                 }
-          }, 1000);
+            }, 1000);
         } else {
-          clearInterval(timerId);
+            clearInterval(timerId);
         }
-    
+
         return () => clearInterval(timerId);
-      },[alertTriggered, localStorageService, navigate])
+    }, [alertTriggered, localStorageService, navigate])
 
     useEffect(() => {
-        if(alertTriggered){
+        if (alertTriggered) {
             confirmAlert({
                 title: 'Session expired',
                 message: 'Your session has expired. Please log in',
@@ -77,7 +77,7 @@ const Sidebar: React.FC<SidebarProps> = ({ children }) => {
                 ]
             });
         }
-    },[alertTriggered])
+    }, [alertTriggered])
 
 
     const getLoginUserName = () => {
@@ -116,61 +116,66 @@ const Sidebar: React.FC<SidebarProps> = ({ children }) => {
     }
 
     const menuItems: MenuItem[] = authed ?
-      [
-        {
-            path: '/dashboard',
-            name: 'Dashboard',
-            icon: <DashboardIcon />,
-        },
-        {
-            path: '/users',
-            name: 'Users',
-            icon: <GroupAddIcon />,
-        },
-        {
-            path: '/imprestlist',
-            name: 'Imprest',
-            icon: <AddToQueueIcon />,
-        },
-        {
-            path: '/rolelist',
-            name: 'Roles',
-            icon: <CoPresentIcon />,
-        },
-        {
-            path: '/productlist',
-            name: 'Products',
-            icon: <InventoryIcon />,
-        },
-        {
-            path: '/userrole',
-            name: 'Assigned Roles',
-            icon: <ManageAccountsIcon />,
-        },
-        {
-            path: '/imprestproductlist',
-            name: 'Imprest Products',
-            icon: <GradingIcon />,
-        },
-    ] :
-    
-    [
-        {
-            path: '/dashboard',
-            name: 'Dashboard',
-            icon: <DashboardIcon />,
-        },
-        {
-            path: '/productlist',
-            name: 'Products',
-            icon: <InventoryIcon />,
-        },
-        {
-            path: '/imprestproductlist',
-            name: 'Imprest Products',
-            icon: <GradingIcon />,
-        },
-    ];
+        [
+            {
+                path: '/dashboard',
+                name: 'Dashboard',
+                icon: <DashboardIcon />,
+            },
+            {
+                path: '/users',
+                name: 'Users',
+                icon: <GroupAddIcon />,
+            },
+            {
+                path: '/imprestlist',
+                name: 'Imprest',
+                icon: <AddToQueueIcon />,
+            },
+            {
+                path: '/rolelist',
+                name: 'Roles',
+                icon: <CoPresentIcon />,
+            },
+            {
+                path: '/productlist',
+                name: 'Products',
+                icon: <InventoryIcon />,
+            },
+            {
+                path: '/userrole',
+                name: 'Assigned Roles',
+                icon: <ManageAccountsIcon />,
+            },
+            {
+                path: '/imprestproductlist',
+                name: 'Imprest Products',
+                icon: <GradingIcon />,
+            },
+        ] :
+
+        [
+            {
+                path: '/dashboard',
+                name: 'Dashboard',
+                icon: <DashboardIcon />,
+            },
+            {
+                path: '/imprestlist',
+                name: 'Imprest',
+                icon: <AddToQueueIcon />,
+            },
+            {
+                path: '/productlist',
+                name: 'Products',
+                icon: <InventoryIcon />,
+            },
+            {
+                path: '/imprestproductlist',
+                name: 'Imprest Products',
+                icon: <GradingIcon />,
+            },
+        ];
 
     return (
         <>

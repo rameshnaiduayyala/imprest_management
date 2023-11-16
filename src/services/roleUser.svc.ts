@@ -13,15 +13,12 @@ export const createUserRole = async (userRoleData: UserRole) => {
   return response.data;
 };
 
-export async function putUserRoleData(id: number, userRoleData: any) {
-  const response = await axiosInstance.put(`${url}/${id}`, userRoleData, {
+export async function putUserRoleData(id: number, data: any) {
+  return await axiosInstance.put(`${url}/${id}`, data, {
     headers: {
       "Content-Type": "application/json",
     },
   });
-  if (response.status === 200) {
-    return response.data;
-  }
 }
 
 export async function getOneUserRoleData(id: number) {

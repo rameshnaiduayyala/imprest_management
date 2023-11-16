@@ -414,8 +414,8 @@ table tr:nth-child(even) td{
 /******************8General Buttons Style start**********************/
 .gen_buttons {
   display: flex;
-  justify-content:flex-end;
-  /* align-items: center; */
+  justify-content: center;
+  align-items: center;
 }
 @media (max-width:640px)
 {
