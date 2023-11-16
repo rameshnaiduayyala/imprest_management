@@ -1,7 +1,6 @@
 import React, { ChangeEvent } from "react";
 import TextField from "@mui/material/TextField";
 import { InputAdornment } from "@mui/material";
-// import InputLabel from '@mui/material/InputLabel';
 import FormControl from "@mui/material/FormControl";
 
 interface TextFieldProps {
@@ -13,6 +12,10 @@ interface TextFieldProps {
   name?: string;
   inputProps?: React.InputHTMLAttributes<HTMLInputElement>;
   endAdornment?: JSX.Element;
+  autoFocus?: boolean;
+  error?: boolean;
+  helperText?: string | number | boolean;
+  required?: boolean;
 }
 
 const ReusableTextField: React.FC<TextFieldProps> = ({
@@ -22,12 +25,16 @@ const ReusableTextField: React.FC<TextFieldProps> = ({
   onChange,
   name,
   endAdornment = null,
+  autoFocus = false,
+  error = false,
+  helperText = "",
+  required = false,
+  inputProps
 }) => {
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const newValue = event.target.value;
 
     if (type === "number") {
-      // Parse the input value to a number
       onChange(parseFloat(newValue));
     } else {
       onChange(newValue);
@@ -36,8 +43,7 @@ const ReusableTextField: React.FC<TextFieldProps> = ({
 
   return (
     <div className="text-field">
-      <FormControl variant="outlined">
-        {/* <InputLabel htmlFor={name}>{label}</InputLabel> */}
+      <FormControl variant="filled">
         <TextField
           InputProps={{
             endAdornment: endAdornment && (
@@ -45,14 +51,19 @@ const ReusableTextField: React.FC<TextFieldProps> = ({
             ),
           }}
           fullWidth
-          variant="outlined"
+          variant="filled"
           type={type}
           value={value}
           onChange={handleChange}
-          required
+          required={required}
           name={name}
-          autoFocus
-          label={label} // Add label prop to TextField
+          autoFocus={autoFocus}
+          label={label}
+          error={error}
+          helperText={helperText}
+          size='small'
+          inputProps={inputProps}
+
         />
       </FormControl>
     </div>

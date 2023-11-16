@@ -6,10 +6,10 @@ export interface User {
   last_name: string,
   phone_number: string,
   email: string,
-  active: boolean|string,
-  created_by: string,
+  active: boolean | string;
+  created_by?: string,
   created_at?: Date,
-  modified_by: string,
+  modified_by?: string,
   modified_at?: Date,
-  hospital_id?: number | string
+  hospital_id?: number | string,
 }

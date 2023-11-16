@@ -1,36 +1,51 @@
-import axios from 'axios';
+import axiosInstance from '../Interceptors/request.interceptor';
 import { Role } from '../models/role.model';
-
 const url = import.meta.env.VITE_REACT_APP_API_URL + "role";
 export const createRole = async (roleData: Role) => {
-  return await axios.post(`${url}`, roleData, {
+
+  const response = await axiosInstance.post(`${url}`, roleData, {
     headers: {
-      'Content-Type': 'application/json'
-    }
+      'Content-Type': 'application/json',
+    },
   });
+
+  if (response.status === 201) {
+    return response.data;
+  }
 }
 
-// Get RoleList
 
-export const Roleslist = async () => {
-  return await axios.get(`${url}`);
+export const getRoles = async () => {
+
+  const response = await axiosInstance.get(`${url}`);
+  if (response.status === 200) {
+    return response.data;
+  }
 }
-// Update Role
-export const updateRole = async (id: number, roleData: Role) => {
-  return await axios.put(`${url}/${id}`, roleData, {
+
+
+export async function updateRole(id: number, roleData: any) {
+  const response = await axiosInstance.put(`${url}/${id}`, roleData, {
     headers: {
-      'Content-Type': 'application/json'
-    }
+      "Content-Type": "application/json",
+    },
   });
-}
 
+  if (response.status === 201) {
+    return response.data;
+  }
+
+}
 
 // Delete Role
 export const deleteRole = async (id: number) => {
-  return await axios.delete(`${url}/${id}`);
+  return await axiosInstance.delete(`${url}/${id}`);
 }
-// fetch role by id
 
-export const RoleDataById = async (id: number) => {
-  return await axios.get(`${url}/${id}`);
+export const getRoleById = async (id: number) => {
+  const response = await axiosInstance.get(`${url}/${id}`);
+  if (response.status === 200) {
+    return response.data;
+  }
+
 }

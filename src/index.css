@@ -1,45 +1,621 @@
-body {
-  margin: auto;
+
+/***********************Global Font Enbedding Start****************/
+
+body{
+  font-family: 'ClashDisplay-Variable' !important;
+  background: #DBECF3 !important;
+  color:#111111 !important;
 }
-.data_table_global table thead.MuiTableHead-root {
-  border-top: 5px solid #3a67d9;
-  font-size: 1rem;
-  font-weight: 800;
+@media (max-width:640px)
+{
+  body
+  {
+    min-width: 100%;
+    overflow-x: hidden !important;
+  }
 }
-.data_table_global table thead.MuiTableHead-root th {
-  font-size: 0.9rem;
-  font-weight: 700;
-  color: #3a67d9;
-  height: 25px;
-  padding: 10px 10px;
-  box-shadow: 0px 3px 3px -3px rgba(92, 92, 92, 0.75);
-  -webkit-box-shadow: 0px 3px 3px -3px rgba(92, 92, 92, 0.75);
-  -moz-box-shadow: 0px 3px 3px -3px rgba(92, 92, 92, 0.75);
-  background-color: #fff;
+*
+{
+  font-family: 'ClashDisplay-Variable' !important;
 }
-.data_table_global table tbody tr td.css-1ex1afd-MuiTableCell-root {
+/**
+ * @license
+ *
+ * Font Family: Clash Display
+ * Designed by: Indian Type Foundry
+ * URL: https://www.fontshare.com/fonts/clash-display
+ * © 2023 Indian Type Foundry
+ *
+ * Font Styles:
+ * Clash Display Variable(Variable font)
+ * Clash Display Extralight
+ * Clash Display Light
+ * Clash Display Regular
+ * Clash Display Medium
+ * Clash Display Semibold
+ * Clash Display Bold
+ *
+*/
+
+
+/**
+* This is a variable font
+* You can controll variable axes as shown below:
+* font-variation-settings: 'wght' 700.0;
+*
+* available axes:
+
+* 'wght' (range from 200.0 to 700.0)
+
+*/
+
+@font-face {
+  font-family: 'ClashDisplay-Variable';
+  src: url('../src/assets/fonts/clashdisplay/ClashDisplay-Variable.woff2') format('woff2'),
+       url('../src/assets/fonts/clashdisplay/ClashDisplay-Variable.woff') format('woff'),
+       url('../src/assets/fonts/clashdisplay/ClashDisplay-Variable.ttf') format('truetype');
+       font-weight: 200 700;
+       font-display: swap;
+       font-style: normal;
+}
+
+
+@font-face {
+  font-family: 'ClashDisplay-Extralight';
+  src: url('../src/assets/fonts/clashdisplay/ClashDisplay-Extralight.woff2') format('woff2'),
+       url('../src/assets/fonts/clashdisplay/ClashDisplay-Extralight.woff') format('woff'),
+       url('../src/assets/fonts/clashdisplay/ClashDisplay-Extralight.ttf') format('truetype');
+       font-weight: 200;
+       font-display: swap;
+       font-style: normal;
+}
+
+
+@font-face {
+  font-family: 'ClashDisplay-Light';
+  src: url('../src/assets/fonts/clashdisplay/ClashDisplay-Light.woff2') format('woff2'),
+       url('../src/assets/fonts/clashdisplay/ClashDisplay-Light.woff') format('woff'),
+       url('../src/assets/fonts/clashdisplay/ClashDisplay-Light.ttf') format('truetype');
+       font-weight: 300;
+       font-display: swap;
+       font-style: normal;
+}
+
+
+@font-face {
+  font-family: 'ClashDisplay-Regular';
+  src: url('../src/assets/fonts/clashdisplay/ClashDisplay-Regular.woff2') format('woff2'),
+       url('../src/assets/fonts/clashdisplay/ClashDisplay-Regular.woff') format('woff'),
+       url('../src/assets/fonts/clashdisplay/ClashDisplay-Regular.ttf') format('truetype');
+       font-weight: 400;
+       font-display: swap;
+       font-style: normal;
+}
+
+
+@font-face {
+  font-family: 'ClashDisplay-Medium';
+  src: url('../src/assets/fonts/clashdisplay/ClashDisplay-Medium.woff2') format('woff2'),
+       url('../src/assets/fonts/clashdisplay/ClashDisplay-Medium.woff') format('woff'),
+       url('../src/assets/fonts/clashdisplay/ClashDisplay-Medium.ttf') format('truetype');
+       font-weight: 500;
+       font-display: swap;
+       font-style: normal;
+}
+
+
+@font-face {
+  font-family: 'ClashDisplay-Semibold';
+  src: url('../src/assets/fonts/clashdisplay/ClashDisplay-Semibold.woff2') format('woff2'),
+       url('../src/assets/fonts/clashdisplay/ClashDisplay-Semibold.woff') format('woff'),
+       url('../src/assets/fonts/clashdisplay/ClashDisplay-Semibold.ttf') format('truetype');
+       font-weight: 600;
+       font-display: swap;
+       font-style: normal;
+}
+
+
+@font-face {
+  font-family: 'ClashDisplay-Bold';
+  src: url('../src/assets/fonts/clashdisplay/ClashDisplay-Bold.woff2') format('woff2'),
+       url('../src/assets/fonts/clashdisplay/ClashDisplay-Bold.woff') format('woff'),
+       url('../src/assets/fonts/clashdisplay/ClashDisplay-Bold.ttf') format('truetype');
+       font-weight: 700;
+       font-display: swap;
+       font-style: normal;
+}
+
+/***********************Global Font Enbedding End****************/
+
+.dashboard_spacing
+{
+  padding:1.55% 2% 2% 0%;
+  width:100%;
   text-align: left;
-  padding: 0px 15px;
-  color: rgba(0, 0, 0, 0.87);
-  height: 25px;
-}
-.data_table_global table tbody tr:nth-child(even) {
-  background-color: #e9effd;
-}
-.search_field .css-1o9s3wi-MuiInputBase-input-MuiOutlinedInput-input {
-  padding: 8px 10px;
+
 }
 
-button.btn_general {
-  margin: 0 !important;
-  color: #fff !important;
+.global_page_spacing
+{
+  padding:0.5% 2% 2% 8%;
+  width:100%;
+  text-align: left;
+  
+}
+@media (max-width:768px)
+{
+  .global_page_spacing
+{
+  padding:0.5% 2% 2% 12%;
+  width:100%;
+  text-align: left;
+  
+}
+}
+@media (max-width:640px)
+{
+  .global_page_spacing {
+    padding: 7% 2% 2% 2%;
+    margin-left: 20%;
+    width: 100%;
+    text-align: left;
+}
+}
+.static_title {
+  justify-content: left;
+}
+.page_main_title
+{
+  text-transform: uppercase;
   font-weight: 600;
+  font-size: 22px;
+  color:#111111;
+  align-items: center;
+  display: flex;
 }
-.css-1d6wzja-MuiButton-startIcon {
-  margin-right: 0 !important;
+.common_container {
+  margin-left: auto;
+  margin-right: auto;
+  width: fit-content;
+  border-radius: 8px;
+  /* background-color: #EDEDED; */  
+  background-color: #eef6f9;
+  padding: 14px;
+  margin-top: 14px;
+  border: 1px solid #ccc;
+}
+@media (max-width:640px)
+{
+  .common_container {
+    /* margin-left: auto;
+    margin-right: auto; */
+    width: 100% !important;
+    border-radius: 8px;
+    background-color: #EDEDED;
+    padding: 15px 5px 15px 15px;
+    /* margin-top: 14px; */
+    margin: 0;
+    border: 1px solid #ccc;
+  }
+}
+.gen_ddn_position
+{
+  position: relative;
+  margin-top:-7px !important;
+  margin-left:-7px !important;
+}
+.checkbox
+{
+  display: flex;
+  /* vertical-align: middle; */
+  height: 55px;
+  line-height: 30px;
+  align-items: center;
+}
+.top_title_buttons_area
+{
+  display: flex;
+}
+@media (max-width:640px)
+{
+  .top_title_buttons_area
+{
+  display: block !important;
+}
+}
+.inner_container {
+  padding: 10px;
+}
+@media (max-width:640px)
+{
+  .inner_container {
+    padding: 10px;
+  }
+}
+/*********************Grid Styles start*****************/
+
+.css-1ygcj2i-MuiTableCell-root
+{
+  font-family: 'ClashDisplay-Variable' !important;
+}
+.css-1ygcj2i-MuiTableCell-root
+{
+  font-size: 0.85rem;
+  font-weight: 600;
+  color:#111111 !important;
+  
+}
+.css-1q1u3t4-MuiTableRow-root
+{
+  background-color: #fff;
+  box-shadow: 0 1px 1px rgba(0,0,0,0.12), 0 2px 2px rgba(0,0,0,0.12);
+}
+thead.MuiTableHead-root
+{
+  border-top:2px solid #111111 !important;
+
 }
 
-.tableRow {
-  height: 0px;
-  padding: 0px;
+/*********************Grid Styles end*****************/
+.css-md26zr-MuiInputBase-root-MuiOutlinedInput-root, 
+.css-1jy569b-MuiFormLabel-root-MuiInputLabel-root,
+.css-1d3z3hw-MuiOutlinedInput-notchedOutline
+{
+  font-family: 'ClashDisplay-Variable' !important;
+}
+label[data-shrink=false]+.MuiInputBase-formControl .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input
+{
+  font-family: 'ClashDisplay-Variable' !important;
+}
+/* .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input */
+.css-wb57ya-MuiFormControl-root-MuiTextField-root
+
+{
+  /* padding: 5px 15px 12px 15px!important; */
+    /* height: 30px !important;
+    line-height: 30px !important; */
+    width:288px !important;
+}
+@media only screen and (min-device-width : 821px) and (max-device-width : 1024px) 
+{
+  .css-wb57ya-MuiFormControl-root-MuiTextField-root
+  {
+    width:100% !important;
+  }
+}
+@media only screen and (min-device-width : 1025px) and (max-device-width : 1200px) 
+{
+  .css-wb57ya-MuiFormControl-root-MuiTextField-root
+  {
+    width:100% !important;
+  }
+}
+
+@media(max-width:640px)
+{
+  /* .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input */
+  .css-wb57ya-MuiFormControl-root-MuiTextField-root
+
+{
+  padding: unset !important;
+    height: auto !important;
+    line-height: 30px !important;
+    width:250px !important;
+}
+}
+@media(max-width:480px)
+{
+  /* .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input */
+  .css-wb57ya-MuiFormControl-root-MuiTextField-root
+
+{
+  padding: unset !important;
+    height: auto !important;
+    line-height: 30px !important;
+    width:265px !important;
+}
+}
+/************TextField Padding bottom ******************/
+.css-10botns-MuiInputBase-input-MuiFilledInput-input
+{
+  padding-bottom:0 !important;
+  
+}
+/************Dropdown Padding bottom ******************/
+.css-d9oaum-MuiSelect-select-MuiInputBase-input-MuiFilledInput-input
+{
+  padding-bottom:0 !important;
+ 
+}
+/************Dropdown BG color******************/
+.css-1ds7fem-MuiInputBase-root-MuiFilledInput-root-MuiSelect-root
+{
+  background-color: #fff !important;
+  border-radius: 0 !important;
+}
+.css-o943dk-MuiFormLabel-root-MuiInputLabel-root
+{
+  top: -7px !important;
+}
+.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input
+{
+  padding: 0 15px 17px 15px!important;
+    height: 30px !important;
+    line-height: 30px !important;
+   
+   
+  
+}
+.css-1ualgfl-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root
+{
+  margin: -8px 0 0 -8px;
+}
+.css-2m9kme-MuiFormControl-root
+{
+  width:283px !important;
+}
+@media (max-width:640px)
+{
+  .css-2m9kme-MuiFormControl-root
+{
+  width:249px !important;
+}
+}
+.css-1jy569b-MuiFormLabel-root-MuiInputLabel-root
+{
+  top: -7px !important;
+}
+.css-1ex1afd-MuiTableCell-root
+{
+  padding: 4px 16px !important;
+  font-size: 0.8rem !important;
+  color:#111111 !important;
+}
+table tr:nth-child(odd) td{
+  background-color: #F9FDFF;
+  border-bottom:1px solid #E5F6FC;
+}
+table tr:nth-child(even) td{
+  background-color: #ffffff;
+  border-bottom:none;
+  border-bottom:1px solid #E5F6FC;
+}
+
+/*****************************8ToolTip Style Start***************************/
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -60px;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+/*****************************8ToolTip Style Start***************************/
+
+
+/******************8General Buttons Style start**********************/
+.gen_buttons {
+  display: flex;
+  justify-content:flex-end;
+  /* align-items: center; */
+}
+@media (max-width:640px)
+{
+  .gen_buttons {
+    display: unset;
+    justify-content: center;
+    align-items: center;
+    padding-left: 0 !important;
+  }
+}
+.gen_buttons button
+{
+  background-color: transparent !important;
+}
+@media (max-width:640px)
+{
+  .gen_buttons button
+{
+  background-color: transparent !important;
+  margin-left:0 !important
+}
+}
+.gen_buttons svg.css-i4bv87-MuiSvgIcon-root
+{
+  width:2rem !important;
+  height: 2rem !important;
+  background-color: #111111 !important;
+  color:#fff !important;
+  padding: 5px !important;
+  border-radius: 33px;
+}
+.gen_buttons span
+{
+  color:#015DAE !important;
+}
+.gen_buttons span:hover
+{
+  color:#E74900 !important;
+}
+/******************8General Buttons Style end**********************/
+
+
+/****************88Show / Hide sections styles start*********************/
+
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen and (min-device-width : 320px) and (max-device-width : 767pxpx) {
+  .hide_at_xs_sm_device{
+      display: none;
+  }
+}
+
+
+/****************88Show / Hide sections styles end*********************/
+/****************************Thin scroll bar styles start*************************/
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #688698; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #688698; 
+}
+
+
+
+/**************************Top Menu DropDown for User Login***********************/
+
+
+.profile {
+  position: relative;
+  text-align: left;
+  /* margin-top: 60px */
+  /* top: 4%; */
+  position: absolute;
+  /* right: 2%; */
+}
+@media (max-width:640px)
+{
+  .profile {
+    position: relative;
+    text-align: right;
+    /* margin-top: 60px */
+    /* top: 4%; */
+    position: absolute;
+    /* right: 4%; */
+  }
+}
+.profile img {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  /* border: 2px solid #fff; */
+  cursor: pointer
+}
+
+.dropdown-content {
+  display: none;
+  /* position: absolute; */
+  position: relative;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  transition:all 2s;
+  
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block
+}
+
+.dropdown-content a:hover {
+  background-color: #ddd
+}
+
+.dropdown:hover .dropdown-content {
+  display: block
+}
+
+.profile ul {
+  background-color: #fff;
+  color:#000;
+  width: 200px;
+  height: 205px;
+  border-radius: 10px;
+  right: 25px;
+  /* top: 0; */
+  top: -250px;
+  left:0;
+  position: absolute;
+  padding: 8px 8px 16px 8px;
+  transition: all 0.5s;
+  z-index: 1;
+  box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
+}
+
+.profile ul::before {
+  content: '';
+  position: absolute;
+  background-color: #fff;
+  height: 10px;
+  width: 10px;
+  /* top: -5px; */
+  bottom: -5px;
+  transform: rotate(45deg);
+  left:15px;
+} 
+
+.profile ul li {
+  list-style: none;
+  text-align: left;
+  font-size: 15px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  transition: all 0.5s;
+  cursor: pointer;
+  border-radius: 4px
+}
+
+.profile ul li:hover {
+  background-color: #eee
+}
+
+.profile ul li i {
+  margin-right: 7px
+}
+
+
+
+
+/*****************************************/
+@media (min-width: 900px)
+{
+.css-10voxkt-MuiGrid-root {
+    -webkit-flex-basis: 25%;
+    -ms-flex-preferred-size: 25%;
+    flex-basis: 25%;
+    -webkit-box-flex: 0;
+    -webkit-flex-grow: 0;
+    -ms-flex-positive: 0;
+    flex-grow: 0;
+    max-width: 100% !important; 
+}
+.css-d9oaum-MuiSelect-select-MuiInputBase-input-MuiFilledInput-input.MuiSelect-select
+{
+  /* min-height: 1.88em !important; */
+}
 }

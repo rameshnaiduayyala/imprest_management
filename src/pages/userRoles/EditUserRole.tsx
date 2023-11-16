@@ -1,96 +1,98 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect } from "react";
-import { getData } from "../../services/user.svc";
-import { Roleslist } from "../../services/role.svc";
-import { getImprest } from "../../services/imprest.svc";
-import {createUserRole,putUserRoleData,getOneUserRoleData} from "../../services/roleUser.svc";
-import PersonAddIcon from "@mui/icons-material/PersonAdd";
+import { getusers } from "../../services/user.svc";
+import { getRoles } from "../../services/role.svc";
+import { putUserRoleData, getOneUserRoleData } from "../../services/roleUser.svc";
 import { useNavigate, useParams } from "react-router-dom";
+import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import { Box, Grid } from "@mui/material";
-import Dropdown from "../../components/common/Dropdown";
+import Dropdown, { DropdownOption } from "../../components/common/Dropdown";
 import CancelIcon from "@mui/icons-material/Cancel";
 import CustomButton from "../../components/common/Button";
 import "./userRoles.css";
+import { Role } from "../../models/role.model";
+import { User } from "../../models/user.model";
+import { Imprest } from "../../models/imprest.model";
+import { getImprests } from "../../services/imprest.svc";
+import { ToastContainer, toast } from "react-toastify";
 
 const EditUserRole = () => {
-  const [users, setUsers] = useState([]);
-  const [roles, setRoles] = useState([]);
-  const [imprest, setImprest] = useState([]);
+  const [users, setUsers] = useState<DropdownOption[]>([]);
+  const [roles, setRoles] = useState<DropdownOption[]>([]);
+  const [imprests, setImprests] = useState<DropdownOption[]>([]);
   const [userRoleData, setUserRoleData] = useState({
-    user: "",
-    role: "",
-    imprest: "",
+    user_id: "",
+    role_id: "",
+    imprest_id: "",
   });
   const navigate = useNavigate();
   const { id } = useParams();
 
   useEffect(() => {
-    fetchUserData();
-    fetchRolesData();
-    fetchUserRoleData();
+    fetchUsers();
+    fetchRoles();
+    fetchImprests();
     if (id) {
       fetchUserRoleForEdit(id);
     }
   }, [id]);
 
   // Fetch Roles Data
-  const fetchRolesData = async () => {
+  const fetchRoles = async () => {
     try {
-      const response = await Roleslist();
-      if (response.status === 200) {
-        const rolesData = response.data.map((role:any) => ({
+      type Nullable<T> = T | null;
+      const roles: Nullable<Role[]> = await getRoles();
+      if (roles != null && roles.length > 0) {
+        const roleDropdownList: DropdownOption[] = roles.map((role: Role) => ({
           name: role.name,
-          value: role.id.toString(),
+          value: role.id?.toString() || '',
         }));
-        setRoles(rolesData);
+        setRoles(roleDropdownList);
       }
     } catch (error) {
-      console.error("Fetch roles failed:", error);
+      console.error("Fetch Roles failed:", error);
     }
   };
 
   // Fetch User Data
-  const fetchUserData = async () => {
+  const fetchUsers = async () => {
     try {
-      const response = await getData();
-      if (response.status === 200) {
-        const UsersData = response.data.map((user:any) => ({
-          name: user.user_name,
-          value: user.id.toString(),
-        }));
-        setUsers(UsersData);
-      }
+      const users = await getusers();
+      const userDropdownList: DropdownOption[] = users.map((user: User) => ({
+        name: user.user_name,
+        value: user.id?.toString(),
+      }));
+      setUsers(userDropdownList);
+
     } catch (error) {
       console.error("Fetch Users failed:", error);
     }
   };
 
-  // Fetch Imprest Data
-  const fetchUserRoleData = async () => {
+  const fetchImprests = async () => {
     try {
-      const response = await getImprest();
-      if (response.status === 200) {
-        const UsersData = response.data.map((userRoles:any) => ({
-          name: userRoles.name,
-          value: userRoles.id.toString(),
+      const imprests = await getImprests();
+      if (imprests != null && imprests.length > 0) {
+        const imprestDropdownList: DropdownOption[] = imprests.map((imprest: Imprest) => ({
+          name: imprest.name,
+          value: imprest.id?.toString() || '',
         }));
-        setImprest(UsersData);
+        setImprests(imprestDropdownList);
       }
     } catch (error) {
-      console.error("Fetch Users failed:", error);
+      console.error("Fetch Imprests failed:", error);
     }
   };
 
   // Fetch Role Data for Editing
-  const fetchUserRoleForEdit = async (id:any) => {
+  const fetchUserRoleForEdit = async (id: any) => {
     try {
       const response = await getOneUserRoleData(id);
       if (response.status === 200) {
         const roleData = response.data;
         setUserRoleData({
-          user: roleData.user_id.toString(),
-          role: roleData.role_id.toString(),
-          imprest: roleData.imprest_id.toString(),
+          user_id: roleData.user_id.toString(),
+          role_id: roleData.role_id.toString(),
+          imprest_id: roleData.imprest_id.toString(),
         });
       }
     } catch (error) {
@@ -101,37 +103,16 @@ const EditUserRole = () => {
   // Update Function
   const handleSubmit = async () => {
     try {
-      if (!userRoleData.user || !userRoleData.role || !userRoleData.imprest) {
-        alert("Please select all required fields.");
-        return;
-      }
-      const userRoleId = parseInt(userRoleData.user);
-      const roleId = parseInt(userRoleData.role);
-      const imprestId = parseInt(userRoleData.imprest);
-      if (isNaN(userRoleId) || isNaN(roleId) || isNaN(imprestId)) {
-        alert("Invalid values for user, role, or imprest.");
-        return;
-      }
-      const userData = {
-        user_id: userRoleId,
-        role_id: roleId,
-        imprest_id: imprestId,
-      };
       if (id) {
-        const response = await putUserRoleData(id, userData);
+        const userRoleId = parseInt(id)
+        const response = await putUserRoleData(userRoleId, userRoleData);
         if (response) {
-          alert("Role update successful");
-          navigate("/userrole");
+          toast.success("Update User Role update successful")
+          setTimeout(() => {
+            navigate("/userrole");
+          }, 1500);
         } else {
           console.error("Role update failed");
-        }
-      } else {
-        const response = await createUserRole(userData);
-        if (response) {
-          console.log("Role assignment successful");
-          navigate("/userrole");
-        } else {
-          console.error("Role assignment failed");
         }
       }
     } catch (error) {
@@ -139,7 +120,7 @@ const EditUserRole = () => {
     }
   };
 
-  const handleChange = (field:any, value:any) => {
+  const handleChange = (field: any, value: any) => {
     setUserRoleData((prevUserRoles) => ({
       ...prevUserRoles,
       [field]: value,
@@ -152,61 +133,64 @@ const EditUserRole = () => {
 
   return (
     <>
-      <div className="adduser">
-        <h2>{id ? "Edit User Role:" : "Assign User To Role:"}</h2>
-      </div>
-      <Box
-        className="add_user_container"
-        component="form"
-        onSubmit={handleSubmit}
-      >
+      <ToastContainer />
+      <div className="top_title_buttons_area" style={{ display: 'flex' }}>
+        <h2>EDIT USER ROLE</h2>
         <div>
-          <Grid container className="inner_container" spacing={1}>
-            <Grid item xs={6} sm={3} className="grid_item_space">
-              <Dropdown
-                name="Users:"
-                options={users}
-                value={userRoleData.user}
-                onChange={(value) => handleChange("user", value)}
-              />
-            </Grid>
-          </Grid>
-          <Grid container className="inner_container" spacing={1}>
-            <Grid item xs={6} sm={3} className="grid_item_space">
-              <Dropdown
-                name="Role:"
-                options={roles}
-                value={userRoleData.role}
-                onChange={(value) => handleChange("role", value)}
-              />
-            </Grid>
-          </Grid>
-          <Grid container className="inner_container" spacing={1}>
-            <Grid item xs={6} sm={3} className="grid_item_space">
-              <Dropdown
-                name="Imprest:"
-                options={imprest}
-                value={userRoleData.imprest}
-                onChange={(value) => handleChange("imprest", value)}
-              />
-            </Grid>
-          </Grid>
-          <div className="buttons">
+          <div className="gen_buttons" style={{ paddingLeft: '50px' }}>
             <CustomButton
-              className="submitbtn"
-              startIcon={<PersonAddIcon />}
+              className=""
+              startIcon={<ManageAccountsIcon />}
               type="submit"
+              onClick={handleSubmit}
             >
-              {id ? "Update" : "Submit"}
+              <span>Submit</span>
             </CustomButton>
             <CustomButton
-              className="buttoncancel"
+              className=""
               startIcon={<CancelIcon className="button_icon" />}
               onClick={handleCancel}
             >
-              Cancel
+              <span>Cancel</span>
             </CustomButton>
           </div>
+        </div>
+      </div>
+      <Box
+        className="common_container"
+        component="form"
+        onSubmit={handleSubmit}
+      >
+        <div className="outer_container">
+          <Grid container className="inner_container" spacing={1}>
+            <Grid item xs={12} sm={6} md={3} className="grid_item_space">
+              <Dropdown
+                name="Users:"
+                options={users}
+                value={userRoleData.user_id}
+                onChange={(value) => handleChange("user_id", value)}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6} md={3} className="grid_item_space">
+              <Dropdown
+                name="Role:"
+                options={roles}
+                value={userRoleData.role_id}
+                onChange={(value) => handleChange("role_id", value)}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6} md={3} className="grid_item_space">
+              <Dropdown
+                name="Imprest:"
+                options={imprests}
+                value={userRoleData.imprest_id}
+                onChange={(value) => handleChange("imprest_id", value)}
+              />
+            </Grid>
+
+          </Grid>
+
+
         </div>
       </Box>
     </>

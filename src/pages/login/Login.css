@@ -2,9 +2,25 @@
     display: flex;
     flex-direction: row;
     align-items:center;
+    background-color: #fff;
+    }
+    @media (max-width:640px)
+    {
+        .mmaindiv {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            background-color: #fff;
+            justify-content: center;
+            top: 25%;
+            position: absolute;
+            width: 100%;
+            padding: 30px 20px 40px 20px;
+        }
     }
     .login_form {
-    color:blue
+    color:#111111;
+    
     }
     .login {
      color: #36454F;
@@ -13,6 +29,7 @@
     display:flex ;
     justify-content:flex-end ;
     text-decoration: none;
+    font-size: 14px !important;
     }
     .button {
     width: -webkit-fill-available;
@@ -22,3 +39,110 @@
     .loginIcon {
         color: white;
     }
+    .login_left_logo .login_form h4{
+        font-weight: 500;
+        width:250px;
+        margin: 20px 0 0 35px;
+    }
+    .login_form h6{
+        font-weight: 600;
+        color:#bbb;
+    }
+    button.MuiButton-containedPrimary
+    {
+background-color: #111111 !important;
+    }
+    .login_left_logo
+    {
+        align-items: center;
+        display: flex;
+        justify-content: center;
+        width: 50%;
+        height: 100vh;
+        background-color: rgb(207, 226, 241);
+    }
+    .login_form h2
+    {
+        color:#111111;
+        font-size: 30px;
+    }
+    .login_form h2 span
+    {
+        color:#688698;
+        font-size: 22px;
+        margin-top:-5px;
+        position: absolute;
+    }
+    .login_form h4 span
+    {
+        color:#111111;
+        font-size: 16px;
+        font-weight: 600;
+       margin-left:15px;
+        position: absolute;
+    }
+    @media (max-width:768px)
+    {
+        .login_form h4 span {
+            color: #111111;
+            font-size: 16px;
+            font-weight: 600;
+            margin-left: 0;
+            margin-top: 25px;
+            position: absolute;
+            left: 0;
+        }
+    }
+ .logo_area
+ {
+    position: relative;
+    margin-left: -10%;
+    display: flex;
+ }
+ .logo_area h2 span
+ {
+    position: absolute;
+    margin-top: -7px;
+    font-weight: 800;
+    font-size: 22px;
+    color: #688698;
+ }
+ @media (max-width:768px)
+ {
+    .logo_area
+    {
+       position: relative;
+       margin-left: 0%;
+       display: block;
+    }
+ }
+ .css-sghohy-MuiButtonBase-root-MuiButton-root
+ {
+    margin-top:35px !important;
+ }
+ /****************88Show / Hide sections styles start*********************/
+
+
+@media only screen and (min-width : 320px) and (max-width : 767px) {
+    .hide_at_xs_sm_device{
+        display: none !important;
+    }
+  }
+  @media only screen and (min-width : 320px) and (max-width : 767px) {
+    .show_at_xs_sm_device{
+        display: block !important;
+        top: -40%;
+        position: absolute;
+        width: 100%;
+    }
+  }
+  @media only screen and (min-width : 768px) and (max-width : 2000px) {
+    .show_at_xs_sm_device{
+        display: none !important;
+        top: -50%;
+        position: absolute;
+        width: 100%;
+    }
+  }
+  
+  /****************88Show / Hide sections styles end*********************/

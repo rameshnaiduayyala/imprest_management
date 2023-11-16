@@ -63,13 +63,13 @@
 }
 .adduser {
   color: rgb(63 112 237);
-  margin-left: 10%;
+  /* margin-left: 10%; */
 }
 input[type="text"],
 input[type="select"],
-textarea {
+/* textarea {
   background-color: #fff !important;
-}
+} */
 .checkbox {
   display: flex;
   flex-direction: row;

@@ -6,7 +6,8 @@ interface CustomButtonProps extends Omit<ButtonProps, 'size' | 'color'> {
   size?: 'sm' | 'md' | 'lg';
   color?: string;
   icon?: ReactNode;
-  onClick?: () => void; // Define onClick event handler
+  type?: 'button' | 'submit';
+  onClick?: (e: React.MouseEvent | React.FormEvent) => void;
 }
 
 const useStyles = makeStyles(() => ({
@@ -29,10 +30,10 @@ const CustomButton: React.FC<CustomButtonProps> = ({ size, color, children, icon
       className={size ? classes[size] : classes.md}
       style={{
         backgroundColor: color || '#4caf50',
-        color: 'Black', // Set text color to white
-        margin:'10px'
+        color: 'Black',
+        margin: '10px'
       }}
-      onClick={onClick} // Pass the onClick event handler
+      onClick={onClick}
       {...rest}
     >
       {icon && icon}

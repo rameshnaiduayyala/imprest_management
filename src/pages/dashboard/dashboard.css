@@ -1,0 +1,157 @@
+.main_container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.container_inner {
+    padding: 5px;
+}
+
+.tittle_dashboard {
+    margin-bottom: 5px;
+}
+
+.first_column {
+
+    background-color: #dbecf3;
+    min-height: 100vh;
+    display: grid;
+}
+
+.second_column {
+    background-color: #e8f0f3;
+    min-height: 100vh;
+    display: grid;
+}
+
+.third_column {
+    background-color: #e8f0f3;
+    min-height: 100vh;
+    display: grid;
+}
+
+/* Stock css */
+
+.main_stock {
+    display: flex;
+    padding: 5px;
+    padding-right: 20px;
+    justify-content: space-between;
+}
+
+.imprestprod_main_div {
+    height: 10rem;
+}
+
+.inner_box {
+    background-color: #f8fcff;
+    height: 5rem;
+    width: 8rem;
+}
+
+/* Imprest Styles */
+
+.imprest_graph {
+    height: 10rem;
+    text-align: center;
+}
+
+
+/* Purchase Order Sryles */
+
+.po_main_div {
+    height: 10rem;
+}
+
+.inner_pobox1 {
+    background-color: #dadee1;
+    height: 5rem;
+    width: 13rem;
+    margin-right: 20px;
+}
+
+.inner_pobox2 {
+    background-color: #e8f4d9;
+    height: 5rem;
+    width: 13rem;
+    margin-right: 20px;
+}
+
+.main_po {
+    justify-content: center;
+    display: flex;
+    padding: 8px;
+}
+
+/* Notification styles */
+.notification_main_div {
+    height: 10rem;
+}
+
+.notification_success {
+    background-color: #e8f4d9;
+    height: 5rem;
+    width: 13rem;
+    margin-right: 20px;
+}
+
+.notification_bounce {
+    background-color: #ffe3e3;
+    height: 5rem;
+    width: 13rem;
+    margin-right: 20px;
+}
+
+.main_camstatus {
+    height: 10rem;
+}
+
+/* Meraki Styles */
+.meraki_graphs {
+    height: 10rem;
+    background-color: #dbecf3;
+    margin-top: 8px;
+}
+
+.camera_good {
+    background-color: #e8f4d9;
+    height: 5rem;
+    width: 13rem;
+    margin-right: 20px;
+}
+
+.camera_action {
+    background-color: #ffe3e3;
+    height: 5rem;
+    width: 13rem;
+    margin-right: 20px;
+}
+
+.main_meraki_div {
+    justify-content: space-between;
+    text-align: center;
+}
+
+.values {
+    display: flex;
+    text-align: center;
+    margin-top: 15px;
+    justify-content:space-around;
+    align-items: center;
+}
+.icons{
+font-size:xx-large;
+}
+
+.instock{
+    color:#0d99ff;
+    font-size: 20px;
+}
+.outofstock{
+    color: #dc3412;
+    font-size: 20px;
+}
+.closetomin{
+    color:darkgrey;
+    font-size: 20px;
+}

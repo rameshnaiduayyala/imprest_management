@@ -1,32 +1,34 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import axios from "axios";
-import { UserRoleData } from "../models/userRole.model";
+
+import axiosInstance from "../Interceptors/request.interceptor";
+import { UserRole } from "../models/userRole.model";
 const url = import.meta.env.VITE_REACT_APP_API_URL + "userrole";
 
-//Get All Data
+
 export async function getUserRoleData() {
-  return await axios.get(`${url}`);
+  return await axiosInstance.get(`${url}`);
 }
-//Create Methode
-export const createUserRole = async (userRoleData: UserRoleData) => {
-  const response = await axios.post(`${url}`, userRoleData);
+
+export const createUserRole = async (userRoleData: UserRole) => {
+  const response = await axiosInstance.post(`${url}`, userRoleData);
   return response.data;
 };
-//Upadte Methode
-export async function putUserRoleData(id: number, data: any) {
-  return await axios.put(`${url}/${id}`, data, {
+
+export async function putUserRoleData(id: number, userRoleData: any) {
+  const response = await axiosInstance.put(`${url}/${id}`, userRoleData, {
     headers: {
       "Content-Type": "application/json",
     },
   });
+  if (response.status === 200) {
+    return response.data;
+  }
 }
 
-//Get One
 export async function getOneUserRoleData(id: number) {
-  return await axios.get(`${url}/${id}`);
+  return await axiosInstance.get(`${url}/${id}`);
 }
 
-//Delete Methode
+
 export async function deleteUserRoleData(id: number) {
-  return await axios.delete(`${url}/${id}`);
+  return await axiosInstance.delete(`${url}/${id}`);
 }

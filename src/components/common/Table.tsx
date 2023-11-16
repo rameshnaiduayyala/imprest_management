@@ -11,12 +11,14 @@ import {
   TablePagination,
   TableSortLabel,
   IconButton,
+  Tooltip
 } from "@mui/material";
+
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { getValueByNestedProp } from "../../utilities/helper";
 
-interface Column {
+export interface Column {
   id: string;
   label: string;
   IsNestedProprty?: boolean | undefined,
@@ -82,7 +84,7 @@ const ReusableTable: React.FC<Props> = ({
     <Paper>
       <TableContainer style={{ width: "fitContent" }}>
         <Table>
-          <TableHead style={{ borderTop: "4px solid blue" }}>
+          <TableHead>
             <TableRow>
               {columns.map((column) => (
                 <TableCell key={column.id} align={column.align || "left"}>
@@ -91,7 +93,7 @@ const ReusableTable: React.FC<Props> = ({
                       active={false}
                       direction="asc"
                       onClick={() => handleSort(column.id)}
-                      style={{ color: "blue" }}
+
                     >
                       {column.label}
                     </TableSortLabel>
@@ -117,14 +119,17 @@ const ReusableTable: React.FC<Props> = ({
                     <TableCell key={column.id} align={column.align || "left"}>
                       {column.id === "actions" ? ( // Check if it's the useractions column
                         <>
-                          <IconButton onClick={() => onEdit(row.id)}>
-                            <EditIcon />
-                          </IconButton>
-
-                          {onDelete && (
-                            <IconButton onClick={() => onDelete(row.id)}>
-                              <DeleteIcon />
+                          <Tooltip title="Edit" placement="top" arrow>
+                            <IconButton onClick={() => onEdit(row.id)}>
+                              <EditIcon />
                             </IconButton>
+                          </Tooltip>
+                          {onDelete && (
+                            <Tooltip title="Delete" placement="top" arrow>
+                              <IconButton onClick={() => onDelete(row.id)}>
+                                <DeleteIcon />
+                              </IconButton>
+                            </Tooltip>
                           )}
                         </>
                       ) : (typeof getValueByNestedProp(row, column.id, column.IsNestedProprty)) === "boolean" ? (

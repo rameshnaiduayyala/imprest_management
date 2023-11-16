@@ -1,30 +1,46 @@
-import axios from "axios";
+
+import axiosInstance from "../Interceptors/request.interceptor";
 import { User } from "../models/user.model";
 
-export async function getData() {
-  return await axios.get(`${import.meta.env.VITE_REACT_APP_API_URL}user`);
+const url = import.meta.env.VITE_REACT_APP_API_URL + "user";
+
+export const getusers = async () => {
+
+  const response = await axiosInstance.get(`${url}`);
+  if (response.status === 200) {
+    return response.data;
+  }
+
 }
 
-export async function postUserData(data: User) {
-  return await axios.post(`${import.meta.env.VITE_REACT_APP_API_URL}user`, data, {
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
+export const createUser = async (userdata: User) => {
+
+  const response = await axiosInstance.post(`${url}`, userdata);
+
+  if (response.status === 201) {
+    return response.data;
+  }
+
 }
 
-export async function putUserData(id: number, data: User) {
-  return await axios.put(`${import.meta.env.VITE_REACT_APP_API_URL}user/${id}`, data, {
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
+export async function updateUser(id: number, userData: User) {
+  const response = await axiosInstance.put(`${url}/${id}`, userData);
+
+  if (response.status === 200) {
+    return response.data;
+  }
+
 }
 
-export async function deleteUserData(id: number) {
-  return await axios.delete(`${import.meta.env.VITE_REACT_APP_API_URL}user/${id}`);
+export async function deleteOneUser(id: number) {
+  return await axiosInstance.delete(`${url}/${id}`);
 }
 
-export async function getOneUserData(id: number) {
-  return await axios.get(`${import.meta.env.VITE_REACT_APP_API_URL}user/${id}`);
+export const getUserById = async (id: number) => {
+  const response = await axiosInstance.get(`${url}/${id}`);
+
+  if (response.status === 200) {
+    return response.data;
+  }
+
 }

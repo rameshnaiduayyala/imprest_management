@@ -1,36 +1,29 @@
 import React, { useState, useEffect } from "react";
-import { Box, Button, InputAdornment, Paper, TextField } from "@mui/material";
-import SearchIcon from "@mui/icons-material/Search";
+import { Box, Paper } from "@mui/material";
 import ReusableTable from "../../components/common/Table";
-import PersonAddIcon from "@mui/icons-material/PersonAdd";
+import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import { useNavigate } from "react-router-dom";
 import CircularProgress from "@mui/material/CircularProgress";
 import { getUserRoleData } from "../../services/roleUser.svc";
 import "./userRoles.css";
+import CustomButton from "../../components/common/Button";
+import { User } from "../../models/user.model";
 
 const headCells = [
-  { id: "id", label: "Id", IsNestedProprty: false },
   { id: "role.name", label: "Role", IsNestedProprty: true },
   { id: "user.user_name", label: "User", IsNestedProprty: true },
-  { id: "imprest.name", label: "Imprest", IsNestedProprty: true},
-  { id: "active", label: "Active", IsNestedProprty: false },
+  { id: "imprest.name", label: "Imprest", IsNestedProprty: true },
   { id: "actions", label: "Actions", IsNestedProprty: false },
 ];
 
 const UserRoles: React.FC = () => {
-  const [search, setSearch] = useState<string>("");
-  const [data, setData] = useState([]);
+  const [userRoles, setUserRoles] = useState<User[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const navigate = useNavigate();
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const handleSearch = (e: string | number | any) => {
-    setSearch(e.target.value);
-  };
-
   useEffect(() => {
-    setData(data);
-  }, [data, search]);
+    setUserRoles(userRoles);
+  }, [userRoles]);
 
   useEffect(() => {
     fetchData();
@@ -40,22 +33,32 @@ const UserRoles: React.FC = () => {
     try {
       const response = await getUserRoleData();
       const jsonData = await response.data;
-      setData(jsonData);
+      setUserRoles(jsonData);
       setLoading(false);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
   };
 
-  //Handle Edit Methode
   const handleEdit = (id: number) => {
     navigate(`/editroleuser/${id}`);
   };
 
   return (
     <div className="subpage_content">
-      <div className="static_title">
+      <div className="top_title_buttons_area" style={{ display: 'flex' }}>
         <h2 className="page_main_title">Assigned Roles</h2>
+        <div>
+          <div className="gen_buttons" style={{ paddingLeft: '50px' }}>
+            <CustomButton
+              className=""
+              startIcon={<ManageAccountsIcon />}
+              onClick={() => navigate("/addroleuser")}
+
+            >
+              <span>Assign Role</span>
+            </CustomButton></div>
+        </div>
       </div>
       <Box
         sx={{
@@ -65,31 +68,7 @@ const UserRoles: React.FC = () => {
           mb: 2,
         }}
       >
-        <TextField
-          className="search_field"
-          placeholder="Search"
-          type="text"
-          size="small"
-          onChange={handleSearch}
-          style={{ marginTop: "15px", padding: "3px" }}
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <SearchIcon />
-              </InputAdornment>
-            ),
-          }}
-        />
-        <Button
-          className="btn_general"
-          variant="contained"
-          startIcon={<PersonAddIcon />}
-          onClick={() => navigate("/addroleuser")}
-        >
-          Assign Role
-        </Button>
       </Box>
-
       <Paper
         style={{ width: "100%", marginTop: "0px" }}
         className="data_table_global"
@@ -99,7 +78,11 @@ const UserRoles: React.FC = () => {
             <CircularProgress />
           </div>
         ) : (
-          <ReusableTable columns={headCells} data={data} onEdit={handleEdit} />
+          <ReusableTable
+            columns={headCells}
+            data={userRoles}
+            onEdit={handleEdit}
+          />
         )}
       </Paper>
     </div>

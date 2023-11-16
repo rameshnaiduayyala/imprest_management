@@ -1,0 +1,161 @@
+*{
+    margin:0;
+    padding: 0;
+    text-decoration: none;
+  }
+  .container{
+    display: flex;
+  } 
+  .main{
+    width:100%;
+    padding: 20px;
+  }
+  .sidebar{
+    background: #000;
+    color: white;
+    height: 100vh;
+    width: 250px;
+    padding: 10px 0 15px 0;
+    position: fixed;
+    z-index: 9999;
+    transition: width 1s, height 4s;
+
+  }
+  .sidenav{
+    background: #000;
+    color:white;
+    height: 100%;
+    width: 75px;
+    padding: 10px 0 15px 0;
+    position: fixed;
+    z-index: 9999;
+    bottom: 0;
+    
+    
+  }
+ 
+  .top-section{
+    display: flex;
+    align-items: center;
+    height: 55px;
+    padding-left: 12px;
+  }
+  .sidenav .top-section
+  {
+    padding: 12px;
+    height: 55px;
+  }
+  
+  .logo{
+    font-size: 16px;
+    padding: 15px;
+
+  }
+  
+  .bars{
+    display: flex;
+    font-size: 25px;
+    margin-Left:15px;
+  }
+  
+  .sidebar .link{
+    justify-content: left;
+  }
+  .sidebar .link:hover{
+    justify-content: left;
+  }
+  .link{
+    display: flex;
+    color:white;
+    padding:10px 10px 15px 27px;
+    gap:15px;
+    transition: all 0.5s;
+    justify-content: center;
+  }
+  .sidenav .link{
+    padding:10px 10px 15px 13px;
+  }
+  
+  .link:hover{
+    background: #E8F4D9;
+    color:#000;
+    transition: all 0.5s;
+    justify-content: center;
+  }
+  
+  .active{
+    background:#E8F4D9;
+    color:black;
+     font-weight: bold;
+  }
+  
+  .icon, .link_text{
+    font-size: 20px;
+    padding-top: 3px;
+  }
+.link-text
+{
+  padding: 7px 0 0 0;
+}
+  .calender{
+    width: 1000px;
+    margin-left: 60px;
+  }
+  .fc-day-sat,
+  .fc-day-sun {
+    background-color: #e3d2d24d
+  }
+  .top-menu
+  {
+    /* height:400px; */
+    height: 100vh;
+    overflow-y: auto;
+    border-bottom: 1px solid #688698;
+  }
+  
+  .bottom-menu {
+  /* position: relative;
+    top: 250px;  */
+    position: absolute;
+    /* bottom: 0; */
+    bottom: 40px;
+    /* width: 234px; */
+    width: 100%;
+    padding: 15px 15px 15px 20px;
+    /* margin-top:50px; */
+    background-color:#000 ;
+   
+  }
+  .bottom-menu svg
+  {
+    color:#fff;
+  }
+  .bottom-menu h6
+  {
+    font-size: 14px;
+    padding: 0 0 0 15px;
+  }
+  .profie {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+  
+  .notification-alrets {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px; 
+  }
+
+  .notification-alrets svg{
+    margin-right:2px;
+  }
+ 
+  .logout {
+    display: flex;
+    align-items: center;
+  }
+  .bottom-menu-toggle{
+    display: flex;
+    align-items: center;
+  }

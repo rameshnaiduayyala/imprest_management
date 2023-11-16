@@ -1,102 +1,119 @@
-import { Roleslist, deleteRole } from "../../services/role.svc";
+import { getRoles, deleteRole } from "../../services/role.svc";
 import { Role } from "../../models/role.model";
 import { useState, useEffect } from "react";
-import { Typography } from "@mui/material";
+import { Box, Paper } from "@mui/material";
 import CustomButton from "../../components/common/Button";
 import ReusableTable from "../../components/common/Table";
 import { CircularProgress } from "@mui/material";
+import CoPresentIcon from "@mui/icons-material/CoPresent";
 import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from "react-toastify";
+import Modal from "../../components/common/Modal";
+import EditRole from "./EditRole";
 
 const headerCells = [
-    { id: "id", label: "Role Name" },
     { id: "name", label: "Role Name" },
     { id: "description", label: "Description" },
-    { id: "actions", label: "" }
+    { id: "actions", label: "Actions" }
 ]
 
 const RoleList = () => {
 
     const navigate = useNavigate();
-    const [roleList, setRoleList] = useState<Role[]>([])
+    const [roles, setRoles] = useState<Role[]>([])
     const [loading, setLoading] = useState<boolean>(true);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [roleId, setRoleId] = useState(0);
+
+    const openModal = (id: number) => {
+        setRoleId(id),
+            setIsModalOpen(true);
+    };
+    const closeModal = () => {
+        setIsModalOpen(false);
+    };
 
     useEffect(() => {
-        fetchRolesData();
-    }, [])
+        if (!isModalOpen) {
+            fetchRoles();
+        }
+    }, [isModalOpen]);
 
-    const fetchRolesData = async () => {
+    const fetchRoles = async () => {
         try {
-            const response = await Roleslist();
-            if (response.status === 200) {
-                console.log('Roles fetched successfully:', response.data);
-                setRoleList(response.data);
+            const Roles = await getRoles();
+            if (Roles) {
+                setRoles(Roles);
                 setLoading(false);
             }
         } catch (error) {
             console.error('Feth roles failed:', error);
-        }
-    };
-    const handleAdd = () => {
-        navigate('/addrole')
-    }
 
-    const handleEdit = (id: number) => {
-        navigate(`/editrole/${id}`)
+        }
     };
 
     const handleDelete = async (id: number) => {
+
         try {
-            const response = await deleteRole(id);
-            if (response.status === 204) {
-                setRoleList((prevRoles) => prevRoles.filter((role) => role.id !== id));
-                console.log(`Role with ID ${id} deleted successfully.`);
-            } else {
-                console.error(`Failed to delete role with ID ${id}`);
-            }
+            await deleteRole(id);
+            toast.success("Role Deleted Successfully ");
+            fetchRoles();
         } catch (error) {
-            console.error(`Error while deleting role with ID ${id}:`, error);
+            console.error(error);
+            toast.error("This user is assigned to Role");
         }
     };
 
     return (
-        <>
-            {loading ? (
-
-                <div className="loader">
-
-                    <CircularProgress />
-
+        <div className="subpage_content">
+            <ToastContainer />
+            <div className="top_title_buttons_area">
+                <h2 className="page_main_title">List Of Roles</h2>
+                <div>
+                    <div className="gen_buttons" style={{ paddingLeft: '50px' }}>
+                        <CustomButton
+                            className=""
+                            startIcon={<CoPresentIcon />}
+                            onClick={() => navigate("/addrole")}
+                        >
+                            <span>ADD Role</span>
+                        </CustomButton></div>
                 </div>
-
-            ) : (
-                <div className="role_list_container">
-                    <div className="header">
-                        <div className="title">
-                            <Typography variant="h4">Role List</Typography>
-                        </div>
-                        <div className="button_add">
-                            <CustomButton onClick={handleAdd}>Add</CustomButton>
-                        </div>
-                    </div>
-                    <div className="table_container">
-                        <div className="table_body">
-                            <ReusableTable
-                                columns={headerCells}
-                                onEdit={handleEdit}
-                                onDelete={handleDelete}
-                                data={roleList}
-
-                            />
-                        </div>
-                    </div>
-                </div>
-
-
-            )}
-            <div>
-
             </div>
-        </>
+            <Box
+                sx={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    mb: 2,
+                }}
+            >
+            </Box>
+            <Paper
+                style={{ width: "100%", marginTop: "0px" }}
+                className="data_table_global"
+            >
+                {loading ? (
+                    <div className="loader">
+                        <CircularProgress />
+                    </div>
+                ) : (
+                    <ReusableTable
+                        columns={headerCells}
+                        data={roles}
+                        onEdit={(id) => openModal(id)}
+                        onDelete={handleDelete}
+                    />
+                )}
+            </Paper>
+            <div>
+                <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+                    <div>
+                        <EditRole id={roleId} onClose={closeModal} />
+                    </div>
+                </Modal>
+            </div>
+        </div>
     )
 }
 

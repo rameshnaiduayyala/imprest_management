@@ -4,17 +4,19 @@ import { InputLabel } from "@mui/material";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
-
 export interface DropdownOption {
-  value: string;
+  value: string | number;
   name: string;
 }
 
 interface DropdownProps {
   options: DropdownOption[];
-  value: string;
+  value: string | number;
+  onChange: (selectedValues: string | number) => void;
   name: string;
-  onChange: (selectedValues: string) => void;
+  error?: boolean;
+  helperText?: string;
+  isRequired?: boolean;
 }
 
 const ITEM_HEIGHT = 48;
@@ -23,7 +25,7 @@ const MenuProps = {
   PaperProps: {
     style: {
       maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-      width: 225,
+      width: 250,
     },
   },
 };
@@ -37,7 +39,9 @@ function getStyles(options: DropdownOption[], value: DropdownOption, theme: Them
   };
 }
 
-const Dropdown: React.FC<DropdownProps> = ({ options, value, name, onChange, }) => {
+
+const Dropdown: React.FC<DropdownProps> = ({ options,
+  value, name, onChange, error, helperText }) => {
   const theme = useTheme();
   const handleChange = (event: SelectChangeEvent<typeof value>) => {
     const selectedValue = event.target.value;
@@ -45,9 +49,9 @@ const Dropdown: React.FC<DropdownProps> = ({ options, value, name, onChange, }) 
   };
 
   return (
-    <div>
-      <FormControl sx={{ width: 225 }} variant="outlined">
-        <InputLabel htmlFor="outlined-select" style={{ textAlign: "center" }}>
+    <div className="gen_ddn_position">
+      <FormControl sx={{ m: 1, width: 300 }} variant="filled">
+        <InputLabel id="demo-multiple-name-label" style={{ textAlign: "center" }}>
           {name}
         </InputLabel>
 
@@ -56,6 +60,8 @@ const Dropdown: React.FC<DropdownProps> = ({ options, value, name, onChange, }) 
           value={value}
           onChange={handleChange}
           MenuProps={MenuProps}
+          error={error}
+          required
         >
           {options.map((option) => (
             <MenuItem
@@ -67,9 +73,16 @@ const Dropdown: React.FC<DropdownProps> = ({ options, value, name, onChange, }) 
             </MenuItem>
           ))}
         </Select>
+        {error && helperText && (
+          <div className="helper-text" style={{ color: 'red', fontSize: "13px" }}>
+            {helperText}
+          </div>
+        )}
       </FormControl>
     </div>
   );
 };
+
+
 
 export default Dropdown;
